@@ -1,0 +1,2 @@
+# ignore files with database connection 
+config.js
