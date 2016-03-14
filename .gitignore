@@ -1,2 +1,3 @@
 # ignore files with database connection 
 config.js
+node_modules
