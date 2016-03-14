@@ -79,7 +79,8 @@ champion9.save();
 var champion10 = new Champion({ name: 'Blitzcrank' });
 champion10.save();
 
-var playerChampionSchema = mongoose.Schema({
+// dont think Mongo schema as a usual relational DB, we can directly store an array of affinity in Player collection, even if data is stored several times
+var playerChampionSchema = mongoose.Schema({ 
     champion: { type:Schema.ObjectId, ref:"Champion"},
 	player: { type:Schema.ObjectId, ref:"Champion"},
 	affinity: String
@@ -88,4 +89,14 @@ var playerChampionSchema = mongoose.Schema({
 var PlayerChampion = mongoose.model('PlayerChampion', playerChampionSchema);
 var champion10 = new PlayerChampion({ affinity: "100", champion:champion1._id, player:player1._id });
 champion10.save();
+
+// best part (#bashreview)
+// even better store it in JSON file and run a script to init the DB 
+var players = [{name: 'Jeff'},
+              {name: 'Daou'},
+              {name: 'Grrrr'}];
+players.forEach((player, index) => {
+    var tmp = new Player(player);
+    tmp.save();
+});
 
