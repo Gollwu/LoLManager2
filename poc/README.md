@@ -62,3 +62,40 @@ Champions
 ~~~~
 
 
+##REST-like API
+Simple interface definition
+####Players
+GET all players
+~~~~javascript
+/dataSource/players
+~~~~
+**Return 
+*name
+*team
+
+GET a specific player
+~~~~javascript
+/dataSource/players/:playerid
+~~~~
+**Return 
+*name
+*team
+
+GET player/player affinity
+~~~~javascript
+/dataSource/players/:playerid/affinityPlayer/:player2id
+~~~~
+** Return
+*affinity
+*nameplayer1
+*nameplayer2
+
+GET player/champion affinity
+~~~~javascript
+/dataSource/players/:playerid/champion/:championid
+~~~~
+**Return
+*affinity
+*player
+*champion
+
