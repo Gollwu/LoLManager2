@@ -1,7 +1,17 @@
-var SimpleLogger = require('simple-node-logger');
+var consoleLogger = require('./app/logger/logger'),
+    Express = require('express'),
+    morgan = require('morgan');
 
-var consoleLogger = SimpleLogger.createSimpleLogger();
 
+var app = Express();
+app.use(morgan('dev'));
+// routes definition
+require('./app/routes/routes')(app);
+
+app.listen(8080);
+
+
+/*test*/
 consoleLogger.info('test');
 
 // override 
@@ -16,3 +26,7 @@ function addition(a, b) {
 }
 
 exports.addition = addition;
+
+/*test*/
+
+
