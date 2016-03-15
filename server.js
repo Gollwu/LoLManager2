@@ -1,6 +1,9 @@
 var consoleLogger = require('./app/logger/logger');
 var mongoose = require("mongoose"),
     Promise = require('promise');
+	
+var env = process.env.NODE_ENV || 'development';
+var config = require('./config/config')[env];
 
 if(process.env.NODE_ENV === 'test'){
     // override log methods to not display anything in the console, is there a better way to do this?
@@ -44,9 +47,7 @@ function setupMongoose() {
     var promise =
         new Promise((fulfill, reject) => {
             try{
-                //mongoose.connect('mongodb://<host><port><db>');
-                mongoose.model('Player', require('./app/models/player'));
-                mongoose.model('Champion', require('./app/models/champion')); 
+                mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);                
                 fulfill();
             } 
             catch(err) {
