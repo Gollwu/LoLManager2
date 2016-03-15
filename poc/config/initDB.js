@@ -1,8 +1,8 @@
 var fs = require('fs'),
     mongo = require('mongodb'),
     consoleLogger = require('../app/logger/logger'),
-    Player = require('./models/player'),
-    Champion = require('./models/champion');
+    Player = require('../app/models/player'),
+    Champion = require('../app/models/champion');
 
 consoleLogger.info('Reading files...');
 
