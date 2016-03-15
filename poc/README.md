@@ -4,6 +4,22 @@
 npm install
 ~~~
 
+##How to run tests
+~~~~
+npm test
+~~~~
+
+##File structure
+app/
+* Middleware: routing, models
+
+config/
+
+public/
+* frontend view...
+
+tests/
+
 ##Tools
 ###Logger
 https://www.npmjs.com/package/simple-node-logger
