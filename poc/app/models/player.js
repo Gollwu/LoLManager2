@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
-var Player = mongoose.Schema({
+var PlayerSchema = mongoose.Schema({
     name: String,
     team: String,
     championsAffinity: [{name: String, affinity: Number}],
     playersAffinity: [{name: String, affinity: Number}]
 });
 
-module.exports = Player;
+module.exports = PlayerSchema;
