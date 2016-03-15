@@ -7,6 +7,7 @@ npm install
 ##Tools
 ###Logger
 https://www.npmjs.com/package/simple-node-logger
+https://github.com/expressjs/morgan
 
 ###Testing
 https://mochajs.org/
@@ -51,13 +52,11 @@ Champions
 ~~~~javascript
 {
     _id: "ahri", 
-    ap: 10,
-    hp: 10
+    strength: 10
 },
 {
     _id: "akali", 
-    ap: 10,
-    hp: 10
+    strength: 10
 }
 ~~~~
 
@@ -65,37 +64,48 @@ Champions
 ##REST-like API
 Simple interface definition
 ####Players
+GET all champions
+~~~~javascript
+/dataSource/champions
+~~~~
+Return 
+* name
+* team
+
 GET all players
 ~~~~javascript
 /dataSource/players
 ~~~~
-**Return 
-*name
-*team
+Return 
+* name
+* team
 
+--
 GET a specific player
 ~~~~javascript
 /dataSource/players/:playerid
 ~~~~
-**Return 
-*name
-*team
+Return 
+* name
+* team
 
+--
 GET player/player affinity
 ~~~~javascript
 /dataSource/players/:playerid/affinityPlayer/:player2id
 ~~~~
-** Return
-*affinity
-*nameplayer1
-*nameplayer2
+Return
+* affinity
+* nameplayer1
+* nameplayer2
 
+--
 GET player/champion affinity
 ~~~~javascript
-/dataSource/players/:playerid/champion/:championid
+/dataSource/players/:playerid/affinityChampion/:championid
 ~~~~
-**Return
-*affinity
-*player
-*champion
+Return
+* affinity
+* player
+* champion
 
