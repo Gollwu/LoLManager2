@@ -10,4 +10,7 @@ module.exports = function(app) {
     app.use('/players', playersRoutes);
     app.use('/champions', championsRoutes);
     app.use('/teams', teamsRoutes);
+    app.get('/', (req, res) => {
+        res.status(200).send('ok'); 
+    });
 };

@@ -1,32 +1,30 @@
-var consoleLogger = require('./app/logger/logger'),
-    Express = require('express'),
+var consoleLogger = require('./app/logger/logger');
+
+function createServer() {
+    var Express = require('express'),
     morgan = require('morgan');
 
+    var app = Express();
+    
+    if(process.env.NODE_ENV !== 'test')
+        app.use(morgan('dev'));
+    
+    // routes definition
+    require('./app/routes/routes')(app);
 
-var app = Express();
-app.use(morgan('dev'));
-// routes definition
-require('./app/routes/routes')(app);
-
-app.listen(8080);
-
-
-/*test*/
-consoleLogger.info('test');
-
-// override 
-consoleLogger.error = function() {
-    var a = 0; 
-    consoleLogger.info(a+1);
-};
-consoleLogger.error();
-
-function addition(a, b) {
-    return a+b;
+    var server = 
+        app.listen(5000, () => {
+            consoleLogger.info('Server listening on port ', 5000);
+        });
+    
+    return server;
 }
 
-exports.addition = addition;
-
-/*test*/
-
-
+if(process.env.NODE_ENV === 'test'){
+    // override log methods to not display anything in the console, is there a better way to do this?
+    consoleLogger.info = consoleLogger.error = consoleLogger.log = consoleLogger.warn = function(){};
+    module.exports = createServer;
+}
+else{
+    createServer();  
+}

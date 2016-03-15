@@ -23,6 +23,7 @@
     "mongodb": "^2.1.7",
     "morgan": "^1.7.0",
     "promise": "^7.1.1",
-    "simple-node-logger": "^0.93.11"
+    "simple-node-logger": "^0.93.11",
+    "supertest": "^1.2.0"
   }
 }
