@@ -1,11 +1,10 @@
 var env = process.env.NODE_ENV || 'development';
-var config = require('./config/config')[env];
+var config = require('./config')[env];
 
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     relationship = require("mongoose-relationship");
 	
-console.log('mongodb://' + config.database.host + config.database.port + config.database.db);	
 mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);
 
 var playerSchema = mongoose.Schema({

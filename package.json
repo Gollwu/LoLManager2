@@ -1,0 +1,30 @@
+{
+  "name": "lol-manager",
+  "version": "0.0.1",
+  "description": "Proof of concept, setup tryouts",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gollwu/LoLManager2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gollwu/LoLManager2/issues"
+  },
+  "homepage": "https://github.com/Gollwu/LoLManager2#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
+    "mocha": "^2.4.5",
+    "mongodb": "^2.1.8",
+	"mongoose":"^4.4.7",
+	"mongoose-relationship":"^0.1.5",
+    "morgan": "^1.7.0",
+    "promise": "^7.1.1",
+    "simple-node-logger": "^0.93.11"
+  }
+}
