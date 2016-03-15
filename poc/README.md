@@ -81,6 +81,15 @@ Return
 * team
 
 --
+GET team
+~~~~javascript
+/dataSource/teams/:teamid
+~~~~
+Return 
+* name
+* array id of players
+
+--
 GET a specific player
 ~~~~javascript
 /dataSource/players/:playerid
