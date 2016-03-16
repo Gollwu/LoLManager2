@@ -6,26 +6,17 @@ var playerSchema = mongoose.Schema({
     championsAffinity: [
         {
             name: String, 
-            affinity: Number
-        },
-        {
+            affinity: Number,
             _id: false
         }
     ],
     playersAffinity: [
         {
             name: String, 
-            affinity: Number
-        },
-        {
+            affinity: Number,
             _id: false
         }
-    ],
-    {
-        _id: false
-    }
+    ]
 });
 
-var Player = mongoose.model('Player', playerSchema);
-
-module.exports = Player;
+module.exports = mongoose.model('Player', playerSchema);

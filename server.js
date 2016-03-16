@@ -19,7 +19,7 @@ else{
         })
         .catch((err) => {
             consoleLogger.info('Failed to open a connection to database. ', err);
-            exit(0);
+            exit(1);
         });
 }
 
