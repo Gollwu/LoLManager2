@@ -12,11 +12,11 @@ var Player = require('../app/models/player.model'),
     Champion = require('../app/models/champion.model');
 	
 //Config for the init of the DB, please remember to empty the tables before launching the script.
-var championAmount = 10; //Max allChampionsNames.length (128 currently)
+var championAmount = 129; //Max allChampionsNames.length (128 currently)
 var playerAmount = 10; //Max allPlayerNames.length (20 currently)
 var onetoHundredAttributesChampions = ["strength"];
 var onetoHundredAttributesPlayers = [];
-var playerAffinitiestoChampions = 10; //Max championAmount
+var playerAffinitiestoChampions = 129; //Max championAmount
 var playerAffinitiestoPlayers = 9; //Max playerAmount-1
 var teamNumbers = 2; //Min 1, Max 2
 
