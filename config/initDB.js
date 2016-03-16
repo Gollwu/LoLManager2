@@ -63,8 +63,10 @@ function setupDB() {
 		for (var j = 0; j < playerAffinitiestoChampions ; j++) { 
 			player.championsAffinity.push({name: allChampionsNames[j], affinity: Math.round(100*Math.random())});
 		}
-		for (var j = 0; j < playerAffinitiestoPlayers ; j++) { 
-			player.playersAffinity.push({name: allPlayerNames[j], affinity: Math.round(100*Math.random())});
+		for (var j = 0; j < playerAffinitiestoPlayers+1 ; j++) { 
+			if(player.name!=allPlayerNames[j]){
+				player.playersAffinity.push({name: allPlayerNames[j], affinity: Math.round(100*Math.random())});
+			}	
 		}
 		for (var j = 0; j < onetoHundredAttributesPlayers ; j++) { 
 			player[onetoHundredAttributesPlayers[j]] =  Math.round(100*Math.random());
