@@ -3,7 +3,10 @@ var mongoose = require('mongoose');
 var championSchema = mongoose.Schema({
     name: String,
     strength: Number,   
-}),{ _id : false });
+    {
+        _id: false
+    }
+});
 
 var Champion = mongoose.model('Champion', championSchema);
 
