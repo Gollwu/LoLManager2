@@ -2,9 +2,8 @@ var mongoose = require('mongoose');
 
 var championSchema = mongoose.Schema({
     name: String,
-    ap: Number,
-    ad: Number
-});
+    strength: Number,   
+}),{ _id : false });
 
 var Champion = mongoose.model('Champion', championSchema);
 
