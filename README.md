@@ -4,6 +4,12 @@
 npm install
 ~~~
 
+##How to run
+node server
+browserify app.js (if change frontend js code)
+
+Globally install: bower, gulp, tsd and typescript
+
 ##How to run tests
 ~~~~
 npm test
