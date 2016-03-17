@@ -3,7 +3,7 @@
  */
 var Express = require('express'),
     router = Express.Router(),
-    handler = require('./players/players.js');
+    handler = require('./handlers/players.handler');
 
 router.get('/', handler.getPlayers);
 

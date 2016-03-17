@@ -47,7 +47,7 @@ function setupMongoose() {
     var promise =
         new Promise((fulfill, reject) => {
             try{
-                var promiseDBConn = mongoose.connect('mongodb://' + config.database.host /*+ config.database.port + config.database.db*/);                
+                var promiseDBConn = mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);                
                 promiseDBConn
                     .then(() => {
                         fulfill();

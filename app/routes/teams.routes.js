@@ -3,7 +3,7 @@
  */
 var Express = require('express'),
     router = Express.Router(),
-    handler = require('./teams/teams.js');
+    handler = require('./handlers/teams.handler');
 
 // GET all teams
 router.get('/', handler.getTeams);
