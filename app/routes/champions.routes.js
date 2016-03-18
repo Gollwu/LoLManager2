@@ -6,5 +6,6 @@ var Express = require('express'),
     handler = require('./handlers/champions.handler');
 
 router.get('/', handler.getChampions);
+router.get('/:championid', handler.getChampionById);
 
 module.exports = router;
