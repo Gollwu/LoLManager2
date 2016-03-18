@@ -19,4 +19,6 @@ var playerSchema = mongoose.Schema({
     ]
 });
 
-module.exports = mongoose.model('Player', playerSchema);
+module.exports = function(db) {
+    db.model('Player', playerSchema);
+};

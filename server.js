@@ -5,12 +5,12 @@ var mongoose = require("mongoose"),
 var env = process.env.NODE_ENV || 'development';
 var config = require('./config/config')[env];
 
-if(process.env.NODE_ENV === 'test'){
+// for testing purposes, export method to create an instance of the server
+if(process.env.NODE_ENV === 'test') {
     // override log methods to not display anything in the console, is there a better way to do this?
     consoleLogger.info = consoleLogger.error = consoleLogger.log = consoleLogger.warn = function(){};
     module.exports = createServer;
-}
-else{
+} else {
     var promise = setupMongoose();
     promise
         .then(() => {
@@ -25,9 +25,8 @@ else{
 
 function createServer() {
     var Express = require('express'),
-    morgan = require('morgan');
-
-    var app = Express();
+        morgan = require('morgan'),
+        app = Express();
     
     if(process.env.NODE_ENV !== 'test')
         app.use(morgan('dev'));
@@ -43,10 +42,13 @@ function createServer() {
     return server;
 }
 
+// define models and open a connection with MongoDB instance
 function setupMongoose() {
     var promise =
         new Promise((fulfill, reject) => {
             try{
+                require('./app/models/champion.model')(mongoose);
+                require('./app/models/player.model')(mongoose);
                 var promiseDBConn = mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);                
                 promiseDBConn
                     .then(() => {

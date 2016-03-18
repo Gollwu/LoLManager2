@@ -5,4 +5,6 @@ var championSchema = mongoose.Schema({
     strength: Number
 });
 
-module.exports = mongoose.model('Champion', championSchema);
+module.exports = function(db) {
+    db.model('Champion', championSchema);
+};

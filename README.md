@@ -120,23 +120,6 @@ Return
 * name
 * team
 
---
-GET player/player affinity
-~~~~javascript
-/dataSource/players/:playerid/affinityPlayer/:player2id
-~~~~
-Return
-* affinity
-* nameplayer1
-* nameplayer2
 
---
-GET player/champion affinity
-~~~~javascript
-/dataSource/players/:playerid/affinityChampion/:championid
-~~~~
-Return
-* affinity
-* player
-* champion
+
 

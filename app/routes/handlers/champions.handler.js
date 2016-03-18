@@ -1,8 +1,7 @@
 /*
  *  Callbacks called after receiving a request
  */
-var consoleLogger = require('../../logger/logger'),
-    Champion = require('../../models/champion.model');
+var consoleLogger = require('../../logger/logger');
 
 var Handler = function() {};
 
