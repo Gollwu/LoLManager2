@@ -5,34 +5,52 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="../css/index.css">
+		
+		<script>	
+			//Functions for team selection		 
+			$(function(){
+				$("#dropdownBlueTeam").on('click', 'li a', function(){				
+				  $("#chooseBlueTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";								 
+			   });
+			});
+			$(function(){
+				$("#dropdownRedTeam").on('click', 'li a', function(){
+				  $("#chooseRedTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";								 		 
+			   });
+			});
+		</script>
         
     </head>
 
 <body>
-    <div class="row">
+    <div class="row" id="teamSelectRow">
         <div class="col-lg-2 col-lg-offset-2">
-            <div class="center-block" ng-controller="TeamCtrl">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Red team
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                    <li ng-repeat="team in teams" ng-init="init()">
-                        <span>{{team}}</span>
-                    </li>
-                </ul>
+            <div class="center-block" ng-controller="TeamCtrl">			
+				<button class="btn btn-primary dropdown-toggle" type="button" id="chooseBlueTeam" data-toggle="dropdown"  aria-expanded="true">
+					{{firstTeam}}				
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu4" ng-init="init()">
+					<li ng-repeat="team in teams">
+						<a href="#">{{team}}</a>
+					</li>
+				</ul>
             </div>
         </div>
 
         <div class="col-lg-2 col-lg-offset-4">
             <div ng-controller="TeamCtrl">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Blue team
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                    <li ng-repeat="team in teams">
-                        <span>{{team}}</span>
-                    </li>
-                </ul>
+                <button class="btn btn-primary dropdown-toggle" id="chooseRedTeam" data-toggle="dropdown" aria-expanded="true">
+                    {{secondTeam}}
+               <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu3" ng-init="init()">
+					<li ng-repeat="team in teams">
+						<a href="#">{{team}}</a>
+					</li>
+				</ul>            
             </div>
         </div>
     </div>

@@ -1,0 +1,12 @@
+#teamSelectRow{
+	margin-top:50px;
+}
+
+#chooseBlueTeam, #chooseRedTeam{
+	min-width:200px;
+}
+
+.dropdown-menu{
+	left: 14px;
+	min-width:200px;
+}

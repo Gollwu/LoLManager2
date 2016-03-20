@@ -4,8 +4,9 @@
 var consoleLogger = require('../logger/logger'),
     teamsRoutes = require('./teams.routes.js'),
     playersRoutes = require('./players.routes.js'),
-    championsRoutes = require('./champions.routes.js'),
-    path = require('path');
+    championsRoutes = require('./champions.routes.js'),	
+    path = require('path'),
+	Express = require('express');
 
 module.exports = function(app, db) {    
     // for all routes, provide a connection to db
@@ -16,11 +17,13 @@ module.exports = function(app, db) {
     app.use('/players', playersRoutes);
     app.use('/champions', championsRoutes);
     app.use('/teams', teamsRoutes);
-    app.get('/index.html', (req, res) => {
+    /*app.get('/index.html', (req, res) => {
         consoleLogger.info(__dirname);
         res.sendFile(path.resolve('public/views/index.html'));
-    });
+    });*/	
     app.get('/bundle.js', (req, res) => {
         res.sendFile(path.resolve('public/build/bundle.js'));
     });
+	
+	app.use('/', Express.static('./public/views'));
 };
