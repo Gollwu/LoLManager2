@@ -17,10 +17,7 @@ module.exports = function(app, db) {
     app.use('/players', playersRoutes);
     app.use('/champions', championsRoutes);
     app.use('/teams', teamsRoutes);
-    /*app.get('/index.html', (req, res) => {
-        consoleLogger.info(__dirname);
-        res.sendFile(path.resolve('public/views/index.html'));
-    });*/	
+  
     app.get('/bundle.js', (req, res) => {
         res.sendFile(path.resolve('public/build/bundle.js'));
     });

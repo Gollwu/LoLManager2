@@ -5,11 +5,11 @@
 var Handler = function() {};
 
 Handler.prototype.getTeams = function(req, res) {	
-	var playerModel = req.database.model('Player');
+	var playerModel = req.database.models.Player;
 	
 	playerModel.find().distinct('team', function(error, ids) {
 		res.send(ids);  
-	});
+	})	
 };
 
 Handler.prototype.getTeamById = function(req, res) {
