@@ -9,5 +9,6 @@ var Express = require('express'),
 router.get('/', handler.getTeams);
 
 router.get('/:teamid', handler.getTeamById);
+router.get('/:teamid/players/', handler.getPlayersByTeam);
 
 module.exports = router;
