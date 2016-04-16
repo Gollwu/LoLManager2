@@ -12,7 +12,7 @@ Handler.prototype.getChampions = function(req, res) {
     })
     .catch((err) => {
         consoleLogger.error(err);
-        res.status(500).send('Unable to access players.');
+        res.status(500).send('Unable to access champions.');
     });
 };
 Handler.prototype.getChampionById = function(req, res) {
@@ -22,7 +22,7 @@ Handler.prototype.getChampionById = function(req, res) {
     })
     .catch((err) => {
         consoleLogger.error(err);
-        res.status(500).send('Unable to access players.');
+        res.status(500).send('Unable to access champions.');
     });
 };
 

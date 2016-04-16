@@ -10,23 +10,23 @@ module.exports = function(app) {
                 method: 'GET'
             })
             .then((response) => {
-                //TODO Case not 2 teams ?    
-					
-				$scope.firstTeam = response.data[0];
-				$scope.secondTeam = response.data[1];				
+			
+                //TODO Case not 2 teams ?    					
+				$scope.blueTeam = response.data[0];
+				$scope.redTeam = response.data[1];				
                 for(var ii = 0; ii < response.data.length; ii++) {
                     $scope.teams.push(response.data[ii]);
                 }	
+				
 				//Get Players from blue team
 				$http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.firstTeam)+'/players',
+					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.blueTeam)+'/players',
 					method: 'GET',				
 				})
 				.then((response) => {
 					 response.data.forEach(function(player) {
 						$scope.blueTeamPlayers.push(player.name); 
-					 });			 			
-					 console.log($scope.blueTeamPlayers);
+					 });	
 				})
 				.catch((err) => {
 					console.log(err);
@@ -34,14 +34,13 @@ module.exports = function(app) {
 				
 				//Get Players from red team
 				$http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.secondTeam)+'/players',
+					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.redTeam)+'/players',
 					method: 'GET',				
 				})
 				.then((response) => {
 					 response.data.forEach(function(player) {
 						$scope.redTeamPlayers.push(player.name); 
-					 });			 			
-					 console.log($scope.redTeamPlayers);
+					 });		
 				})
 				.catch((err) => {
 					console.log(err);

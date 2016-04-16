@@ -13,12 +13,12 @@
 			$(function(){
 				$("#dropdownBlueTeam").on('click', 'li a', function(){				
 				    $("#chooseBlueTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";	
-					//Case if you choose a team already selected for the other side. Pick Either {{firstTeam}} or {{secondTeam}}				  
+					//Case if you choose a team already selected for the other side. Pick Either {{blueTeam}} or {{redTeam}}				  
 					if($(this).text()==$("#chooseRedTeam")[0].innerText.trim()){						
-						if(angular.element("#dropdownBlueTeam").scope().firstTeam!=$("#chooseRedTeam")[0].innerText.trim()){
-							$("#chooseRedTeam")[0].innerHTML = angular.element("#dropdownBlueTeam").scope().firstTeam + " <span class='caret'></span>";								
-						}else if(angular.element("#dropdownBlueTeam").scope().secondTeam!=$("#chooseRedTeam")[0].innerText.trim()){
-							$("#chooseRedTeam")[0].innerHTML = angular.element("#dropdownBlueTeam").scope().secondTeam + " <span class='caret'></span>";								
+						if(angular.element("#dropdownBlueTeam").scope().blueTeam!=$("#chooseRedTeam")[0].innerText.trim()){
+							$("#chooseRedTeam")[0].innerHTML = angular.element("#dropdownBlueTeam").scope().blueTeam + " <span class='caret'></span>";								
+						}else if(angular.element("#dropdownBlueTeam").scope().redTeam!=$("#chooseRedTeam")[0].innerText.trim()){
+							$("#chooseRedTeam")[0].innerHTML = angular.element("#dropdownBlueTeam").scope().redTeam + " <span class='caret'></span>";								
 						}							
 					}					
 			   });
@@ -26,12 +26,12 @@
 			$(function(){
 				$("#dropdownRedTeam").on('click', 'li a', function(){			
 				    $("#chooseRedTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";						
-					//Case if you choose a team already selected for the other side. Pick Either {{firstTeam}} or {{secondTeam}}				  
+					//Case if you choose a team already selected for the other side. Pick Either {{blueTeam}} or {{redTeam}}				  
 					if($(this).text()==$("#chooseBlueTeam")[0].innerText.trim()){						
-						if(angular.element("#dropdownRedTeam").scope().firstTeam!=$("#chooseBlueTeam")[0].innerText.trim()){
-							$("#chooseBlueTeam")[0].innerHTML = angular.element("#dropdownRedTeam").scope().firstTeam + " <span class='caret'></span>";								
-						}else if(angular.element("#dropdownRedTeam").scope().secondTeam!=$("#chooseBlueTeam")[0].innerText.trim()){
-							$("#chooseBlueTeam")[0].innerHTML = angular.element("#dropdownRedTeam").scope().secondTeam + " <span class='caret'></span>";								
+						if(angular.element("#dropdownRedTeam").scope().blueTeam!=$("#chooseBlueTeam")[0].innerText.trim()){
+							$("#chooseBlueTeam")[0].innerHTML = angular.element("#dropdownRedTeam").scope().blueTeam + " <span class='caret'></span>";								
+						}else if(angular.element("#dropdownRedTeam").scope().redTeam!=$("#chooseBlueTeam")[0].innerText.trim()){
+							$("#chooseBlueTeam")[0].innerHTML = angular.element("#dropdownRedTeam").scope().redTeam + " <span class='caret'></span>";								
 						}							
 					}					
 			   });
@@ -42,45 +42,65 @@
         
     </head>
 
-<body>
-    <div class="row" id="teamSelectRow">
-        <div class="col-lg-2 col-lg-offset-2">
-            <div class="center-block" ng-controller="TeamCtrl">			
+<body style="background-image: url('images/background.png');">
+    <div class="row" id="teamSelectRow" ng-controller="TeamCtrl" ng-init="init()">
+        <div class="col-lg-2 col-lg-offset-2" >
+            <div class="center-block" >			
 				<button class="btn btn-primary dropdown-toggle" type="button" id="chooseBlueTeam" data-toggle="dropdown"  aria-expanded="true">
-					{{firstTeam}}				
-				<span class="caret"></span>
+					{{blueTeam}}				
+					<span class="caret"></span>
 				</button>
-				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu2" ng-init="init()">
+				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu2" >
 					<li ng-repeat="team in teams">
 						<a href="#">{{team}}</a>
 					</li>
-				</ul>
-				
-				<div ng-repeat="bluePlayer in blueTeamPlayers">
-					<span> {{bluePlayer}} </span>
-				</div>	
+				</ul>	
             </div>
+				
         </div>
 
         <div class="col-lg-2 col-lg-offset-4">
-            <div ng-controller="TeamCtrl">
+            <div>
                 <button class="btn btn-primary dropdown-toggle" id="chooseRedTeam" data-toggle="dropdown" aria-expanded="true">
-                  {{secondTeam}} 
-               <span class="caret"></span>
+                    {{redTeam}} 
+					<span class="caret"></span>
 				</button>				
-				<ul class="dropdown-menu" id="dropdownRedTeam" aria-labelledby="dropdownMenu4" ng-init="init()">
+				<ul class="dropdown-menu" id="dropdownRedTeam" aria-labelledby="dropdownMenu4" >
 					<li ng-repeat="team in teams">
 						<a href="#">{{team}}</a>
 					</li>
-				</ul> 
-				<div ng-repeat="redPlayer in redTeamPlayers">
-					<span> {{redPlayer}} </span>
-				</div>			
+				</ul>						
             </div>
+			
         </div>
     </div>
 	
-	
+	<div class="row" id="PlayersChampionsRow" ng-controller="TeamCtrl" ng-init="init()">
+		 <div class="col-lg-2 col-lg-offset-2">
+			<div class="center-block">	
+				<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
+					<p> {{bluePlayer}} </p>
+					<img class="playerChampSelect" src="images/champions/square/null.png"/>
+						
+				</div>	
+			</div>	
+		 </div>		 
+		 <div class="col-lg-4" ng-controller="ChampionCtrl" ng-init="init()" id="allChampions">
+			 <div class="center-block">	
+				<div ng-repeat="champion in champions">					
+					<img class="champSelect" src="images/champions/square/{{champion}}_Square_0.png"/>
+				</div>	
+			</div>	
+		 </div>
+		 <div class="col-lg-2">
+			 <div class="center-block">	
+				<div class="playerNames" ng-repeat="redPlayer in redTeamPlayers">
+					<p> {{redPlayer}} </p>
+					<img class="playerChampSelect" src="images/champions/square/null.png"/>
+				</div>	
+			</div>	
+		 </div>
+	</div>
 			
 			
 			

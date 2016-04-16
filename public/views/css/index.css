@@ -2,11 +2,35 @@
 	margin-top:50px;
 }
 
+#PlayersChampionsRow{
+	
+}
+
 #chooseBlueTeam, #chooseRedTeam{
 	min-width:200px;
+}
+
+#allChampions{
+	margin-top:50px;
 }
 
 .dropdown-menu{
 	left: 14px;
 	min-width:200px;
 }
+
+.playerNames{
+	color:#FFF;
+	margin-top:40px;
+}
+
+.playerChampSelect{
+	width:80px;
+	margin-left:60px;
+}
+
+.champSelect{
+	width:80px;
+	float:left;
+}
+
