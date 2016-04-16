@@ -37,7 +37,7 @@
 			   });
 			});
 			
-			//Functions to change the other tea
+			
 		</script>
         
     </head>
@@ -55,36 +55,37 @@
 						<a href="#">{{team}}</a>
 					</li>
 				</ul>
+				
+				<div ng-repeat="bluePlayer in blueTeamPlayers">
+					<span> {{bluePlayer}} </span>
+				</div>	
             </div>
         </div>
 
         <div class="col-lg-2 col-lg-offset-4">
             <div ng-controller="TeamCtrl">
                 <button class="btn btn-primary dropdown-toggle" id="chooseRedTeam" data-toggle="dropdown" aria-expanded="true">
-                  {{BS}}  {{secondTeam}} 
+                  {{secondTeam}} 
                <span class="caret"></span>
-				</button>
-				<button>
-				{{BS}}
-				</button>
+				</button>				
 				<ul class="dropdown-menu" id="dropdownRedTeam" aria-labelledby="dropdownMenu4" ng-init="init()">
 					<li ng-repeat="team in teams">
 						<a href="#">{{team}}</a>
 					</li>
-				</ul>            
+				</ul> 
+				<div ng-repeat="redPlayer in redTeamPlayers">
+					<span> {{redPlayer}} </span>
+				</div>			
             </div>
         </div>
     </div>
 	
-	<div class="row" id="playersRow">
-		<div ng-repeat="bluePlayer in blueTeamPlayers" class="col-lg-2 col-lg-offset-2">
-			<span> {{bluePlayer}} </span>
-		</div>	
+	
+			
+			
+			
 		
-		<div ng-repeat="redPlayer in redTeamPlayers" class="col-lg-2 col-lg-offset-4">
-			<span> {{redTeamPlayers}} </span>
-		</div>	
-	</div>
+	
     
     <script src="http://localhost:5000/bundle.js"></script>
     
