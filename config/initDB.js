@@ -1,17 +1,14 @@
-var env = process.env.NODE_ENV || 'development';
-var config = require('./config')[env];
+var Mongoose = require("mongoose"),
+    Promise = require('promise'),
+    Schema = Mongoose.Schema,
+    relationship = require("mongoose-relationship"),
+	consoleLogger = require('../app/logger/logger'),	
+    env = process.env.NODE_ENV || 'development',
+    config = require('./config')[env];	
 
-var consoleLogger = require('../app/logger/logger');
-var Promise = require('promise');
 
-var mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    relationship = require("mongoose-relationship");
-
-var Player = require('../app/models/player.model'),
-    Champion = require('../app/models/champion.model');
-	
-	
+var Player = require('../app/models/player.model')(Mongoose),
+	Champion = require('../app/models/champion.model')(Mongoose);	
 	
 //Config for the init of the DB, please remember to empty the tables before launching the script.
 var championAmount = 130; //Max allChampionsNames.length (128 currently)
@@ -25,39 +22,58 @@ var teamNumbers = 2; //Min 1, Max 2
 //Arrays with names for champions and players
 var allChampionsNames = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie", "Ashe", "Aurelion Sol", "Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz", "Galio", "Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Illaoi","Irelia","Janna","Jarvan IV", "Jax", "Jayce","Jhin","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'zix","Kindred","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Talon","Tahm Kench","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
 var allPlayerNames = ["ElJefe","Gollwu","Hycariss","DaoulaS","Qrthur","Vaulkh","lardon","ostracil","Nene","Nerevar","Darryck","le joueur francais","GroBen","azexpli","Sowerdski","Kraki","Kraku","pseudo@", "test", "Collot"];
-var allTeamNames = ["Team Solo Jefe", "Counter Daoulas Gaming"];
-	
-var promiseConnDB = mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);
+var allTeamNames = ["Team Solo Jefe", "Counter Daoulas Gaming"];	
 
-promiseConnDB
-    .then(() => {
-        consoleLogger.info('Connected to db');
-    
-        // Wait for all entries to be saved
-        var promises = setupDB();
-        Promise.all(promises)
-            .then(() => {
-                consoleLogger.info('Data init successful.');
-                process.exit(0);
-            })
-            .catch((err) => {
-                consoleLogger.info('Failed to open a connection to database or save data. ', err);
-                process.exit(1)
-            });
-    })
-    .catch((err) => {
-        consoleLogger.info('Failed to open a connection to database or save data. ', err);
-        process.exit(1);
-    });
+var promise = setupMongoose();
+promise
+	.then(() => {
+		consoleLogger.info('DB connection and setup successful.');
+		//process.exit(0);
+	})
+	.catch((err) => {	
+		console.log(err);		
+		consoleLogger.info('Failed to open a connection to database or to create the server. ', err);
+		process.exit(1);
+	});
 
 
-function setupDB() {
+
+// define models and open a connection with MongoDB instance
+function setupMongoose() {
+    var promise =
+        new Promise((fulfill, reject) => {
+            try{
+                
+                var promiseDBConn = Mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db); 					
+                promiseDBConn
+                    .then(() => {
+						var promises = setupDB();
+						Promise.all(promises)
+							.then(() => {
+								fulfill();
+							})
+							.catch((err) => {
+								reject(err);
+							});						
+                    }) 
+                    .catch((err) => {
+                        reject(err);
+                    });
+            } 
+            catch(err) {
+                reject(err);    
+            }
+        });
+    return promise;
+}
+
+function setupDB() {	
     consoleLogger.info('In setupDB');
     var promises = [];
     var promise = {};
 	
 	for (var i = 0; i < playerAmount ; i++) { 
-		var player = new Player({
+		var player = new Mongoose.models.Player({
 			name: allPlayerNames[i],
 			team: allTeamNames[i%teamNumbers],
 			championsAffinity: [],
@@ -80,7 +96,7 @@ function setupDB() {
 	}
 
 	for (var i = 0; i < championAmount ; i++) { 
-		var champion = new Champion({ name: allChampionsNames[i], strength: Math.round(100*Math.random()) });
+		var champion = new Mongoose.models.Champion({ name: allChampionsNames[i], strength: Math.round(100*Math.random()) });
 		for (var j = 0; j < onetoHundredAttributesChampions ; j++) { 
 			champion[onetoHundredAttributesChampions[j]] =  Math.round(100*Math.random());
 		}
@@ -90,10 +106,3 @@ function setupDB() {
             
     return promises;
 }
-
-
-
-
-
-
-
