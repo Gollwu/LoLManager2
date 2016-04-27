@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    app.controller('TeamCtrl', ($scope, $http) => {
+    app.controller('TeamCtrl', ($scope, $http, $timeout) => {
         // get teams from server
         $scope.teams = [];	
 		$scope.blueTeamPlayers = []
@@ -49,9 +49,7 @@ module.exports = function(app) {
             .catch((err) => {
                 console.log(err);
             });  
-			
-		
         };	
-    });
+    });	
 };
 

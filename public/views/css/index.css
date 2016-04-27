@@ -3,6 +3,7 @@
 }
 
 #PlayersChampionsRow{
+	margin-bottom:50px;
 	
 }
 
@@ -10,8 +11,16 @@
 	min-width:200px;
 }
 
+#chooseRedTeam{
+	margin-left:50px;
+}
+
 #allChampions{
 	margin-top:50px;
+	height:800px;
+	overflow-x:hidden;
+	overflow-y:scroll;	
+	width:602px;
 }
 
 .dropdown-menu{
@@ -24,6 +33,10 @@
 	margin-top:40px;
 }
 
+.playerNamesRed{
+	margin-left:100px;
+}
+
 .playerChampSelect{
 	width:80px;
 	margin-left:60px;
@@ -32,5 +45,19 @@
 .champSelect{
 	width:80px;
 	float:left;
+	cursor:pointer;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 1px solid #336699;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #336699;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #204060;
+}
