@@ -52,6 +52,11 @@
 	cursor:pointer;
 }
 
+.picking{
+	border: 3px solid orange;	
+}
+
+
 .row{
 	margin-left:0px;
 	margin-right:0px;
