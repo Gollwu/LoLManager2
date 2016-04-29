@@ -22,7 +22,7 @@ module.exports = function(app) {
 			//Get Champion picked and remove it from the list of pickable champions
 			var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
 			var match = extractChampionNameRegexp.exec(document.getElementById(scope.playerPicking + "Champion").src);		
-			$("#"+match[1]).remove();				
+			$('[id="#'+match[1]+'"]').remove();				
 		
 			//Change currently picking player by taking the following in scope.champSelectOrder			
 			scope.playerPicking = scope.champSelectOrder[scope.champSelectOrder.indexOf(scope.playerPicking)+1];	
@@ -41,11 +41,11 @@ module.exports = function(app) {
 	});
 	//Directive to display
 	app.directive('displayOnEnd', function() {
-	  return function(scope, element, attrs) {	 
-		console.log(scope.$last);
+	  return function(scope, element, attrs) {	
 		if (scope.$last){		
-			console.log( element.parent()[0]);		
-		  element.parent()[0].style.visibility = "visible";
+		   	setTimeout(function(){  
+				element.parent()[0].style.visibility = "visible"; 
+			}, 1000);
 		}
 	  };
 	})
