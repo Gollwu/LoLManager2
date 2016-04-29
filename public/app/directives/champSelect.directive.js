@@ -28,7 +28,7 @@ module.exports = function(app) {
 			scope.playerPicking = scope.champSelectOrder[scope.champSelectOrder.indexOf(scope.playerPicking)+1];	
 			
 			if(scope.playerPicking!=undefined){
-				//Do Sit to launch calculations	
+				//Do Shit to launch calculations	
 			}
 				
 			
@@ -39,4 +39,15 @@ module.exports = function(app) {
 		link: linkFunction
 	  };
 	});
+	//Directive to display
+	app.directive('displayOnEnd', function() {
+	  return function(scope, element, attrs) {	 
+		console.log(scope.$last);
+		if (scope.$last){		
+			console.log( element.parent()[0]);		
+		  element.parent()[0].style.visibility = "visible";
+		}
+	  };
+	})
+
 }

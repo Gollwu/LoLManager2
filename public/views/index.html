@@ -37,8 +37,8 @@
 			</div>	
 		 </div>		 
 		 <div class="col-lg-4" ng-controller="ChampionCtrl" ng-init="init()" >
-			 <div class="center-block" id="allChampions">	
-				<div ng-repeat="champion in champions">					
+			 <div class="center-block" id="allChampions" style="visibility:hidden">	
+				<div display-on-end ng-repeat="champion in champions" >					
 					<img select-champ id="{{champion}}" class="champSelect" src="images/champions/square/{{champion}}_Square_0.png"/>
 				</div>								
 			</div>	
