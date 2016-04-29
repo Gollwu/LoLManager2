@@ -2,8 +2,7 @@
 	margin-top:50px;
 }
 
-#PlayersChampionsRow{
-	margin-bottom:50px;
+#PlayersChampionsRow{	
 	
 }
 
@@ -17,16 +16,21 @@
 
 #allChampions{
 	margin-top:50px;
-	height:800px;
+	height:641px;
 	overflow-x:hidden;
 	overflow-y:scroll;	
 	width:602px;
 }
 
-.dropdown-menu{
-	left: 14px;
-	min-width:200px;
+#lockButton{
+	margin-top:50px;
+	margin-left: 250px;
 }
+
+
+
+
+
 
 .playerNames{
 	color:#FFF;
@@ -46,6 +50,11 @@
 	width:80px;
 	float:left;
 	cursor:pointer;
+}
+
+.row{
+	margin-left:0px;
+	margin-right:0px;
 }
 
 ::-webkit-scrollbar {
