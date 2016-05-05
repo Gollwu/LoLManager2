@@ -3,65 +3,12 @@
         <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		
-		<link rel="stylesheet" href="../css/champSelect.css">	
+		<script src="http://localhost:5000/bundle.js"></script>
+			
     </head>
 
-<body style="background-image: url('images/background.png');">
-    <div class="row" id="teamSelectRow" ng-controller="TeamCtrl" ng-init="init()">
-        <div class="col-lg-2 col-lg-offset-2" >
-            <div class="center-block" >			
-				<span class="btn btn-primary" type="button" id="chooseBlueTeam">
-					{{blueTeam}}	
-				</span>					
-            </div>				
-        </div>
-
-        <div class="col-lg-2 col-lg-offset-4">
-            <div>
-                <span class="btn btn-primary" id="chooseRedTeam">
-                    {{redTeam}} 					
-				</span>									
-            </div>			
-        </div>
-    </div>
-	
-	<div class="row" id="PlayersChampionsRow" ng-controller="TeamCtrl" ng-init="init()">
-		 <div class="col-lg-2 col-lg-offset-2">
-			<div class="center-block">	
-				<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
-					<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
-					<img id="{{bluePlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>						
-				</div>	
-			</div>	
-		 </div>		 
-		 <div class="col-lg-4" ng-controller="ChampionCtrl" ng-init="init()" >
-			 <div class="center-block" id="allChampions" style="visibility:hidden">	
-				<div display-on-end ng-repeat="champion in champions" >					
-					<img select-champ id="{{champion}}" class="champSelect" ng-src="images/champions/square/{{champion}}_Square_0.png"/>
-				</div>								
-			</div>	
-			<button lock-button href="#" class="btn btn-primary" id="lockButton">Lock</button>	
-		 </div>
-		
-		 <div class="col-lg-2">
-			 <div class="center-block">	
-				<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">
-					<p id="{{redPlayer}}Name"> {{redPlayer}} </p>
-					<img id="{{redPlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>
-				</div>	
-			</div>	
-		 </div>
-	</div>
-			
-			
-			
-		
-	
-    
-    <script src="http://localhost:5000/bundle.js"></script>
-    
-</body>
+	<body style="background-image: url('images/background.png');" ui-view></body>
     
 </html>

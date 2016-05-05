@@ -2,8 +2,9 @@ module.exports = function(app) {
     app.controller('TeamCtrl', ($scope, $http, $timeout) => {
         // get teams from server    
 		$scope.champSelectOrder = [];			
-		$scope.blueTeamPlayers = []
+		$scope.blueTeamPlayers = []	
 		$scope.redTeamPlayers = []
+		
         $scope.init = function() {					
             $http({
                 url: 'http://localhost\:5000/teams',
@@ -24,11 +25,11 @@ module.exports = function(app) {
 						$scope.blueTeamPlayers.push(player.name); 
 					});	
 					//Fill champSelectOrder
-					$scope.champSelectOrder[0]=$scope.blueTeamPlayers[0];		
-					$scope.champSelectOrder[3]=$scope.blueTeamPlayers[1];
-					$scope.champSelectOrder[4]=$scope.blueTeamPlayers[2];
-					$scope.champSelectOrder[7]=$scope.blueTeamPlayers[3];
-					$scope.champSelectOrder[8]=$scope.blueTeamPlayers[4];	
+					$scope.champSelectOrder[0]=[$scope.blueTeamPlayers[0],''];		
+					$scope.champSelectOrder[3]=[$scope.blueTeamPlayers[1],''];
+					$scope.champSelectOrder[4]=[$scope.blueTeamPlayers[2],''];
+					$scope.champSelectOrder[7]=[$scope.blueTeamPlayers[3],''];
+					$scope.champSelectOrder[8]=[$scope.blueTeamPlayers[4],''];	
 				})
 				.catch((err) => {
 					console.log(err);
@@ -44,11 +45,11 @@ module.exports = function(app) {
 						$scope.redTeamPlayers.push(player.name); 
 					 });		
 					 //Fill champSelectOrder
-					$scope.champSelectOrder[1]=$scope.redTeamPlayers[0];		
-					$scope.champSelectOrder[2]=$scope.redTeamPlayers[1];
-					$scope.champSelectOrder[5]=$scope.redTeamPlayers[2];
-					$scope.champSelectOrder[6]=$scope.redTeamPlayers[3];
-					$scope.champSelectOrder[9]=$scope.redTeamPlayers[4];
+					$scope.champSelectOrder[1]=[$scope.redTeamPlayers[0],''];		
+					$scope.champSelectOrder[2]=[$scope.redTeamPlayers[1],''];
+					$scope.champSelectOrder[5]=[$scope.redTeamPlayers[2],''];
+					$scope.champSelectOrder[6]=[$scope.redTeamPlayers[3],''];
+					$scope.champSelectOrder[9]=[$scope.redTeamPlayers[4],''];
 				})
 				.catch((err) => {
 					console.log(err);

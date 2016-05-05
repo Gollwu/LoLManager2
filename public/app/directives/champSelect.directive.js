@@ -18,23 +18,42 @@ module.exports = function(app) {
 	  var linkFunction = function(scope, element, attributes) {
 		var lockButton = element;		
 		$(lockButton).on("click", function() {
-			//Get Champion picked and remove it from the list of pickable champions
+		//First get the number of the player in champ select order
+			var id;
+			for(var i = 0; i < scope.champSelectOrder.length; i++) {
+			   if(scope.champSelectOrder[i][0] === scope.playerPicking) {
+				 id = i;
+			   }
+			}
+			//Get Champion picked
 			var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
 			var match = extractChampionNameRegexp.exec(document.getElementById(scope.playerPicking + "Champion").src);		
-			match[1] = match[1].replace("%20","\\ ").replace("'","\\'");	
-			$('#'+match[1]).remove();				
+			var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
 			
-			//Add the css to display that the player is not picking anymore
-			var d = document.getElementById(scope.playerPicking + "Champion");
-			d.className = d.className.replace(" picking","");
-			//Change currently picking player by taking the following in scope.champSelectOrder			
-			scope.playerPicking = scope.champSelectOrder[scope.champSelectOrder.indexOf(scope.playerPicking)+1];
+			//Store in champSelectOrder the champion that has been picked			
+			scope.champSelectOrder[id][1] = championPicked;	
 			
-			//Add the css to display that the player is picking if players left 	
-			if(scope.playerPicking!=undefined){
+			
+			if(id!=9){			
+				//remove chamion picked from the list of pickable champions
+				var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
+				var match = extractChampionNameRegexp.exec(document.getElementById(scope.playerPicking + "Champion").src);		
+				var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
+				$('#'+championPicked).remove();									
+				
+				//Add the css to display that the player is not picking anymore
 				var d = document.getElementById(scope.playerPicking + "Champion");
-				d.className += " picking";
-				//Do Shit to launch calculations	
+				d.className = d.className.replace(" picking","");	
+				
+				//Change currently picking player by taking the following in scope.champSelectOrder			
+				scope.playerPicking = scope.champSelectOrder[id+1][0];
+				
+				//Add the css to display that the player is picking if players left 			
+				var d = document.getElementById(scope.playerPicking + "Champion");
+				d.className += " picking";			
+			}else{								
+				//change page and launch calculations
+				document.location.href = 'index.html#/gameResults'					
 			}
 				
 			
