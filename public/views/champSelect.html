@@ -1,50 +1,51 @@
 <link rel="stylesheet" href="../css/champSelect.css">
-<div class="row" id="teamSelectRow" ng-controller="TeamCtrl" ng-init="init()">
-	<div class="col-lg-2 col-lg-offset-2" >
-		<div class="center-block" >			
-			<span class="btn btn-primary" type="button" id="chooseBlueTeam">
-				{{blueTeam}}	
-			</span>					
-		</div>				
+<div ng-controller="ChampionSelectCtrl" ng-init="init()">
+	<div class="row" id="teamSelectRow">
+		<div class="col-lg-2 col-lg-offset-2" >
+			<div class="center-block" >			
+				<span class="btn btn-primary" type="button" id="chooseBlueTeam">
+					{{blueTeam}}	
+				</span>					
+			</div>				
+		</div>
+
+		<div class="col-lg-2 col-lg-offset-4">
+			<div>
+				<span class="btn btn-primary" id="chooseRedTeam">
+					{{redTeam}} 					
+				</span>									
+			</div>			
+		</div>
 	</div>
 
-	<div class="col-lg-2 col-lg-offset-4">
-		<div>
-			<span class="btn btn-primary" id="chooseRedTeam">
-				{{redTeam}} 					
-			</span>									
-		</div>			
+	<div class="row" id="PlayersChampionsRow">
+		 <div class="col-lg-2 col-lg-offset-2">
+			<div class="center-block">	
+				<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
+					<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
+					<img id="{{bluePlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>						
+				</div>	
+			</div>	
+		 </div>		 
+		 <div class="col-lg-4">
+			 <div class="center-block" id="allChampions" style="visibility:hidden">	
+				<div display-on-end ng-repeat="champion in champions" >					
+					<img select-champ id="{{champion}}" class="champSelect" ng-src="images/champions/square/{{champion}}_Square_0.png"/>
+				</div>								
+			</div>	
+			<button lock-button href="#" class="btn btn-primary" id="lockButton">Lock</button>	
+		 </div>
+		
+		 <div class="col-lg-2">
+			 <div class="center-block">	
+				<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">
+					<p id="{{redPlayer}}Name"> {{redPlayer}} </p>
+					<img id="{{redPlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>
+				</div>	
+			</div>	
+		 </div>
 	</div>
-</div>
-
-<div class="row" id="PlayersChampionsRow" ng-controller="TeamCtrl" ng-init="init()">
-	 <div class="col-lg-2 col-lg-offset-2">
-		<div class="center-block">	
-			<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
-				<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
-				<img id="{{bluePlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>						
-			</div>	
-		</div>	
-	 </div>		 
-	 <div class="col-lg-4" ng-controller="ChampionCtrl" ng-init="init()" >
-		 <div class="center-block" id="allChampions" style="visibility:hidden">	
-			<div display-on-end ng-repeat="champion in champions" >					
-				<img select-champ id="{{champion}}" class="champSelect" ng-src="images/champions/square/{{champion}}_Square_0.png"/>
-			</div>								
-		</div>	
-		<button lock-button href="#" class="btn btn-primary" id="lockButton">Lock</button>	
-	 </div>
-	
-	 <div class="col-lg-2">
-		 <div class="center-block">	
-			<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">
-				<p id="{{redPlayer}}Name"> {{redPlayer}} </p>
-				<img id="{{redPlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>
-			</div>	
-		</div>	
-	 </div>
-</div>
-			
+</div>				
 			
 			
 		

@@ -1,9 +1,10 @@
 module.exports = function(app) {
-    app.controller('TeamCtrl', ($scope, $http, $timeout) => {
+    app.controller('ChampionSelectCtrl', ($scope, $http, $timeout) => {
         // get teams from server    
 		$scope.champSelectOrder = [];			
 		$scope.blueTeamPlayers = []	
 		$scope.redTeamPlayers = []
+		$scope.champions = [];	
 		
         $scope.init = function() {					
             $http({
@@ -54,6 +55,19 @@ module.exports = function(app) {
 				.catch((err) => {
 					console.log(err);
 				}); 
+				
+				$http({
+					url: 'http://localhost\:5000/champions',
+					method: 'GET'
+				})
+				.then((response) => {					
+					for(var i = 0; i < response.data.length; i++) {
+						$scope.champions.push(response.data[i].name);
+					}								
+				})				
+				.catch((err) => {
+					console.log(err);
+				});  
 				
             })	
 					

@@ -9,13 +9,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
         // HOME STATES AND NESTED VIEWS ========================================
         .state('champSelect', {
             url: '/champSelect',
-            templateUrl: 'champSelect.html'
+            templateUrl: 'champSelect.html',
+			controler : 'ChampionSelectCtrl',
         })
         
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('gameResults', {
             url: '/gameResults',
-            templateUrl: 'gameResults.html' 
+            templateUrl: 'gameResults.html', 
+			controler : 'ResultsCtrl',			
         });
         
 });
@@ -23,8 +25,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 
 // bind controllers
-require('./controllers/team.controller')(app);
-require('./controllers/champion.controller')(app);
+require('./controllers/champSelect.controller')(app);
 require('./controllers/results.controller')(app);
 
 //bind directives
