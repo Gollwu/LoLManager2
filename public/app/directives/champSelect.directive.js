@@ -66,10 +66,10 @@ module.exports = function(app) {
 	});
 	//Directive to display the champions to pick once they are loaded
 	//Also displays the first player picking
-	app.directive('displayOnEnd', function() {
+	app.directive('displayOnEnd', function($timeout) {
 	  return function(scope, element, attrs) {	
 		if (scope.$last){		
-		   	setTimeout(function(){  
+		   	$timeout(function(){  
 				element.parent()[0].style.visibility = "visible"; 
 			}, 1000);			
 		}

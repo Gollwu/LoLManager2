@@ -1,79 +1,27 @@
+var Promise = require('promise');
+
 module.exports = function(app) {
-    app.controller('ChampionSelectCtrl', ($scope, $http, $timeout) => {
-        // get teams from server    
-		$scope.champSelectOrder = [];			
-		$scope.blueTeamPlayers = []	
-		$scope.redTeamPlayers = []
-		$scope.champions = [];	
-		
-        $scope.init = function() {					
-            $http({
-                url: 'http://localhost\:5000/teams',
-                method: 'GET'
-            })
-            .then((response) => {	
-				$scope.blueTeam = response.data[0];
-				$scope.redTeam = response.data[1];	
-				
-				//Get Players from blue team
-				$http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.blueTeam)+'/players',
-					method: 'GET',				
-				})
-				.then((response) => {
-				    $scope.playerPicking = response.data[0].name;
-					response.data.forEach(function(player) {
-						$scope.blueTeamPlayers.push(player.name); 
-					});	
-					//Fill champSelectOrder
-					$scope.champSelectOrder[0]=[$scope.blueTeamPlayers[0],''];		
-					$scope.champSelectOrder[3]=[$scope.blueTeamPlayers[1],''];
-					$scope.champSelectOrder[4]=[$scope.blueTeamPlayers[2],''];
-					$scope.champSelectOrder[7]=[$scope.blueTeamPlayers[3],''];
-					$scope.champSelectOrder[8]=[$scope.blueTeamPlayers[4],''];	
+    app.controller('ChampionSelectCtrl', ($scope, $http, $timeout, champSelectService, championsService) => {  		
+        $scope.init = function() {	
+			//get all champions
+			$scope.champions = championsService.getAllChampions();
+			console.log($scope.champions);
+			
+			$scope.blueTeam = "Team Solo Jefe";
+			$scope.redTeam = "Counter Daoulas Gaming";				
+			
+			var promises = champSelectService.fillPlayers($scope.blueTeam, $scope.redTeam);
+			Promise.all(promises)
+				.then(() => {						
+					$scope.blueTeamPlayers = champSelectService.getBlueTeamPlayersName();	
+					$scope.redTeamPlayers = champSelectService.getRedTeamPlayersName();							
+					$scope.$apply()						
 				})
 				.catch((err) => {
-					console.log(err);
-				}); 
+					reject(err);
+				});					
 				
-				//Get Players from red team
-				$http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent($scope.redTeam)+'/players',
-					method: 'GET',				
-				})
-				.then((response) => {
-					 response.data.forEach(function(player) {
-						$scope.redTeamPlayers.push(player.name); 
-					 });		
-					 //Fill champSelectOrder
-					$scope.champSelectOrder[1]=[$scope.redTeamPlayers[0],''];		
-					$scope.champSelectOrder[2]=[$scope.redTeamPlayers[1],''];
-					$scope.champSelectOrder[5]=[$scope.redTeamPlayers[2],''];
-					$scope.champSelectOrder[6]=[$scope.redTeamPlayers[3],''];
-					$scope.champSelectOrder[9]=[$scope.redTeamPlayers[4],''];
-				})
-				.catch((err) => {
-					console.log(err);
-				}); 
-				
-				$http({
-					url: 'http://localhost\:5000/champions',
-					method: 'GET'
-				})
-				.then((response) => {					
-					for(var i = 0; i < response.data.length; i++) {
-						$scope.champions.push(response.data[i].name);
-					}								
-				})				
-				.catch((err) => {
-					console.log(err);
-				});  
-				
-            })	
-					
-            .catch((err) => {
-                console.log(err);
-            });  			
+            			
         };
     });	
 };

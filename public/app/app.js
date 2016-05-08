@@ -30,3 +30,7 @@ require('./controllers/results.controller')(app);
 
 //bind directives
 require('./directives/champSelect.directive')(app);
+
+//bind services
+require('./services/champSelect.service')(app);
+require('./services/champions.service')(app);
