@@ -124,21 +124,21 @@ module.exports = function(app) {
 			//Return a list of player objects for red team
 			getRedTeamPlayers: function() {		  
 			  var redPlayers = [];
-			  redPlayersName.push(this.data[1]);
-			  redPlayersName.push(this.data[2]);
-			  redPlayersName.push(this.data[5]);
-			  redPlayersName.push(this.data[6]);
-			  redPlayersName.push(this.data[9]);
+			  redPlayers.push(this.data[1]);
+			  redPlayers.push(this.data[2]);
+			  redPlayers.push(this.data[5]);
+			  redPlayers.push(this.data[6]);
+			  redPlayers.push(this.data[9]);
 			  return redPlayers;
 			},
 			//Return a list of player objects for red team
 			getBlueTeamPlayers: function() {		  
 			  var bluePlayers = [];
-			  bluePlayersName.push(this.data[0]);
-			  bluePlayersName.push(this.data[3]);
-			  bluePlayersName.push(this.data[4]);
-			  bluePlayersName.push(this.data[7]);
-			  bluePlayersName.push(this.data[8]);
+			  bluePlayers.push(this.data[0]);
+			  bluePlayers.push(this.data[3]);
+			  bluePlayers.push(this.data[4]);
+			  bluePlayers.push(this.data[7]);
+			  bluePlayers.push(this.data[8]);
 			  return bluePlayers;
 			}
 		};	

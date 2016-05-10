@@ -2,15 +2,12 @@
 	margin-top:50px;
 }
 
-#PlayersChampionsRow{	
-	
-}
 
-#chooseBlueTeam, #chooseRedTeam{
+#redTeamDisplay, #blueTeamDisplay{
 	min-width:200px;
 }
 
-#chooseRedTeam{
+#redTeamDisplay{
 	margin-left:50px;
 }
 

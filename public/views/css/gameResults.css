@@ -2,34 +2,13 @@
 	margin-top:50px;
 }
 
-#PlayersChampionsRow{	
-	
-}
-
-#chooseBlueTeam, #chooseRedTeam{
+#redTeamDisplay, #blueTeamDisplay{
 	min-width:200px;
 }
 
-#chooseRedTeam{
+#redTeamDisplay{
 	margin-left:50px;
 }
-
-#allChampions{
-	margin-top:50px;
-	height:641px;
-	overflow-x:hidden;
-	overflow-y:scroll;	
-	width:602px;
-}
-
-#lockButton{
-	margin-top:50px;
-	margin-left: 250px;
-}
-
-
-
-
 
 
 .playerNames{
@@ -46,32 +25,17 @@
 	margin-left:60px;
 }
 
-.champSelect{
-	width:80px;
-	float:left;
-	cursor:pointer;
+.victoryDisplay{
+	width:300px;	
+	margin-top:50px;	
 }
 
-.picking{
-	border: 3px solid orange;	
+.defeatDisplay{
+	width:200px;
+	margin-top:50px;	
 }
-
 
 .row{
 	margin-left:0px;
 	margin-right:0px;
-}
-
-::-webkit-scrollbar {
-    width: 12px;
-}
-::-webkit-scrollbar-track {
-    background-color: #eaeaea;
-    border-left: 1px solid #336699;
-}
-::-webkit-scrollbar-thumb {
-    background-color: #336699;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: #204060;
 }

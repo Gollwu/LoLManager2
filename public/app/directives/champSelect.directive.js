@@ -26,14 +26,12 @@ module.exports = function(app) {
 			var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
 			
 			//Store in champSelectOrder the champion that has been picked	
-			champSelectService.updatePlayerChampion(playerPicking,championPicked);				
+			champSelectService.updatePlayerChampion(playerPicking,match[1]);	
 			
-			if(!champSelectService.isChampSelectFinished()){			
-				//remove chamion picked from the list of pickable champions
-				var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
-				var match = extractChampionNameRegexp.exec(document.getElementById(playerPicking + "Champion").src);		
-				var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
-				$('#'+championPicked).remove();									
+						
+			
+			if(!champSelectService.isChampSelectFinished()){				
+				$('#'+championPicked).remove();		
 				
 				//Add the css to display that the player is not picking anymore
 				var d = document.getElementById(playerPicking + "Champion");

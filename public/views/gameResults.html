@@ -1,19 +1,21 @@
 <link rel="stylesheet" href="../css/gameResults.css">
 <div class="row" id="teamSelectRow" ng-controller="ResultsCtrl" ng-init="initResults()">
-	<div class="col-lg-2 col-lg-offset-2" >
+	<div class="col-lg-4 col-lg-offset-2" >
 		<div class="center-block" >			
-			<span class="btn btn-primary" type="button" id="chooseBlueTeam">
+			<span class="btn btn-primary" type="button" id="blueTeamDisplay">
 				{{blueTeam}}	
-			</span>					
-		</div>				
+			</span>								
+		</div>		
+		<img style="margin-left:50px;" class="victoryDisplay" ng-src="images/victory.png"/>			
 	</div>
 
-	<div class="col-lg-2 col-lg-offset-4">
+	<div class="col-lg-4 col-lg-offset-2">
 		<div>
-			<span class="btn btn-primary" id="chooseRedTeam">
+			<span class="btn btn-primary" id="redTeamDisplay">
 				{{redTeam}} 					
-			</span>									
+			</span>	
 		</div>			
+		<img class="defeatDisplay" ng-src="images/defeat.png"/>		
 	</div>
 </div>
 
@@ -21,8 +23,8 @@
 	 <div class="col-lg-2 col-lg-offset-2">
 		<div class="center-block">	
 			<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
-				<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
-				<img id="{{bluePlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>						
+				<p id="{{bluePlayer.name}}Name"> {{bluePlayer.name}} </p>
+				<img id="{{bluePlayer.name}}Champion" class="playerChampSelect" ng-src="images/champions/square/{{bluePlayer.champion}}_Square_0.png"/>						
 			</div>	
 		</div>	
 	 </div>		 	
@@ -30,8 +32,8 @@
 	 <div class="col-lg-2">
 		 <div class="center-block">	
 			<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">
-				<p id="{{redPlayer}}Name"> {{redPlayer}} </p>
-				<img id="{{redPlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>
+				<p id="{{redPlayer.name}}Name"> {{redPlayer.name}} </p>
+				<img id="{{redPlayer.name}}Champion" class="playerChampSelect" ng-src="images/champions/square/{{redPlayer.champion}}_Square_0.png"/>
 			</div>	
 		</div>	
 	 </div>
