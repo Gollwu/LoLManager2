@@ -42,6 +42,7 @@ module.exports = function(app) {
 			  champion: '',
 			  team: 'red'
 			}],
+			playerPicking:0,
 			// Receives the name of both team and updates the player names for the champ select
 			fillPlayers: function(blueTeamName, redTeamName) {		
 				var promises = [];
@@ -82,6 +83,16 @@ module.exports = function(app) {
 				
 				return promises	
 			},
+			//get player pucking name and increment player picking
+			getPlayerPicking: function() {		
+				return this.data[this.playerPicking].name;
+			},	
+			isChampSelectFinished: function() {		
+				return (this.playerPicking == 9);
+			},
+			incrementPlayerPicking: function() {
+				this.playerPicking++;
+			},				
 			//Receives a player name and a champions name and assign the champion to the player
 			updatePlayerChampion: function(name, champion) {			 
 			    this.data.forEach(function myFunction(player) {
@@ -89,11 +100,7 @@ module.exports = function(app) {
 						player.champion = champion;
 					}
 				}); 
-			},	
-			//Get first player name
-			getFirstname: function() {			 
-				return this.data[0].name;
-			},						
+			},			
 			//Return a list of players names for red team
 			getRedTeamPlayersName: function() {		  
 			  var redPlayersName = [];

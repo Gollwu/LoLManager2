@@ -1,11 +1,11 @@
 module.exports = function(app) {
 	//Directive when a player press a champion image on the champ select
-	app.directive("selectChamp", function() {
+	app.directive("selectChamp", function(champSelectService) {
 	  var linkFunction = function(scope, element, attributes) {
 		var champSquare = element;
 		//Display that the player clicked on this champion
-		$(champSquare).on("click", function() {			
-			document.getElementById(scope.playerPicking + "Champion").src = this.src
+		$(champSquare).on("click", function() {	
+			document.getElementById(champSelectService.getPlayerPicking() + "Champion").src = this.src
 		});
 	  };
 	  return {
@@ -14,42 +14,36 @@ module.exports = function(app) {
 	  };
 	});
 	//Directive when a player press the lock Button
-	app.directive("lockButton", function() {
+	app.directive("lockButton", function(champSelectService) {
 	  var linkFunction = function(scope, element, attributes) {
 		var lockButton = element;		
 		$(lockButton).on("click", function() {
-		//First get the number of the player in champ select order
-			var id;
-			for(var i = 0; i < scope.champSelectOrder.length; i++) {
-			   if(scope.champSelectOrder[i][0] === scope.playerPicking) {
-				 id = i;
-			   }
-			}
+			var playerPicking = champSelectService.getPlayerPicking();
+		
 			//Get Champion picked
 			var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
-			var match = extractChampionNameRegexp.exec(document.getElementById(scope.playerPicking + "Champion").src);		
+			var match = extractChampionNameRegexp.exec(document.getElementById(playerPicking + "Champion").src);		
 			var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
 			
-			//Store in champSelectOrder the champion that has been picked			
-			scope.champSelectOrder[id][1] = championPicked;	
+			//Store in champSelectOrder the champion that has been picked	
+			champSelectService.updatePlayerChampion(playerPicking,championPicked);				
 			
-			
-			if(id!=9){			
+			if(!champSelectService.isChampSelectFinished()){			
 				//remove chamion picked from the list of pickable champions
 				var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
-				var match = extractChampionNameRegexp.exec(document.getElementById(scope.playerPicking + "Champion").src);		
+				var match = extractChampionNameRegexp.exec(document.getElementById(playerPicking + "Champion").src);		
 				var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
 				$('#'+championPicked).remove();									
 				
 				//Add the css to display that the player is not picking anymore
-				var d = document.getElementById(scope.playerPicking + "Champion");
+				var d = document.getElementById(playerPicking + "Champion");
 				d.className = d.className.replace(" picking","");	
 				
 				//Change currently picking player by taking the following in scope.champSelectOrder			
-				scope.playerPicking = scope.champSelectOrder[id+1][0];
+				champSelectService.incrementPlayerPicking();
 				
 				//Add the css to display that the player is picking if players left 			
-				var d = document.getElementById(scope.playerPicking + "Champion");
+				var d = document.getElementById(champSelectService.getPlayerPicking() + "Champion");
 				d.className += " picking";			
 			}else{								
 				//change page and launch calculations
