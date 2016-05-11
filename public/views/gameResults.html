@@ -20,20 +20,35 @@
 </div>
 
 <div class="row" id="PlayersChampionsRow" ng-controller="ResultsCtrl" ng-init="initResults()">
-	 <div class="col-lg-2 col-lg-offset-2">
-		<div class="center-block">	
+	 <div class="col-lg-4 col-lg-offset-2">
+		<div style="float:right; margin-right: 10%;">	
+			<header></header>
 			<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
-				<p id="{{bluePlayer.name}}Name"> {{bluePlayer.name}} </p>
-				<img id="{{bluePlayer.name}}Champion" class="playerChampSelect" ng-src="images/champions/square/{{bluePlayer.champion}}_Square_0.png"/>						
+				<span id="{{bluePlayer.name}}Name" class="playerBlueName"> {{bluePlayer.name}} </span>
+				<img id="{{bluePlayer.name}}Champion" class="playerChampSelect bluePlayerChampSelect" ng-src="images/champions/square/{{bluePlayer.champion}}_Square_0.png"/>
+				<div class="blueScores">
+					<span class="score">0</span>
+					<span class="score">/</span>
+					<span class="score">0</span>
+					<span class="score">/</span>
+					<span class="score">0</span>
+				</div>						
 			</div>	
 		</div>	
 	 </div>		 	
 	
-	 <div class="col-lg-2">
-		 <div class="center-block">	
-			<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">
-				<p id="{{redPlayer.name}}Name"> {{redPlayer.name}} </p>
-				<img id="{{redPlayer.name}}Champion" class="playerChampSelect" ng-src="images/champions/square/{{redPlayer.champion}}_Square_0.png"/>
+	 <div class="col-lg-4">
+		 <div style="float:left; margin-left: 10%;">	
+			<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">	
+				<div class="redScores">
+					<span class="score">0</span>
+					<span class="score">/</span>
+					<span class="score">0</span>
+					<span class="score">/</span>
+					<span class="score">0</span>
+				</div>	
+				<img id="{{redPlayer.name}}Champion" class="playerChampSelect redPlayerChampSelect" ng-src="images/champions/square/{{redPlayer.champion}}_Square_0.png"/>
+				<span id="{{redPlayer.name}}Name" class="playerRedName"> {{redPlayer.name}} </span>
 			</div>	
 		</div>	
 	 </div>
