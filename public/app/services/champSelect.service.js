@@ -4,43 +4,53 @@ module.exports = function(app) {
 			data: [{
 			  name: '',
 			  champion: '',
-			  team: 'blue'
+			  team: 'blue',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'red'
+			  team: 'red',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'red'
+			  team: 'red',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'blue'
+			  team: 'blue',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'blue'
+			  team: 'blue',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'red'
+			  team: 'red',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'blue'
+			  team: 'blue',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'blue'
+			  team: 'blue',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'red'
+			  team: 'red',
+			  affinity: 0
 			},{
 			  name: '',
 			  champion: '',
-			  team: 'red'
+			  team: 'red',
+			  affinity: 0
 			}],
 			playerPicking:0,
 			// Receives the name of both team and updates the player names for the champ select
@@ -140,6 +150,25 @@ module.exports = function(app) {
 			  bluePlayers.push(this.data[7]);
 			  bluePlayers.push(this.data[8]);
 			  return bluePlayers;
+			},
+			
+			//Set the affinities of the players with their champion once champ select is done
+			setAffinities: function() {		  
+				var promises = [];
+			    this.data.forEach(function a(player,index) {
+					promises.push($http({
+						url: 'http://localhost\:5000/players/'+encodeURIComponent(player.name),
+						method: 'GET'
+					})
+					.then((response) => {
+						response.data.championsAffinity.forEach(function b(champion) {
+							if(champion.name==player.champion){
+								player.affinity = champion.affinity
+							}
+						});					
+					}));	
+				}); 
+				return promises;
 			}
 		};	
 	});
