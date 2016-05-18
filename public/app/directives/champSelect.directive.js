@@ -23,15 +23,14 @@ module.exports = function(app) {
 			//Get Champion picked
 			var extractChampionNameRegexp = /.*\/(.*)_Square_0.png/g;
 			var match = extractChampionNameRegexp.exec(document.getElementById(playerPicking + "Champion").src);		
-			var championPicked = match[1].replace("%20","\\ ").replace("'","\\'");	
+			var championPicked = match[1].replace("%20","\ ").replace("'","\'");	
+			var championPickedForJquery = match[1].replace("%20","\\ ").replace("'","\\'");	
 			
-			//Store in champSelectOrder the champion that has been picked	
-			champSelectService.updatePlayerChampion(playerPicking,match[1]);	
-			
-						
+			//Store in champSelectOrder the champion that has been picked			
+			champSelectService.updatePlayerChampion(playerPicking,championPicked);		
 			
 			if(!champSelectService.isChampSelectFinished()){				
-				$('#'+championPicked).remove();		
+				$('#'+championPickedForJquery).remove();		
 				
 				//Add the css to display that the player is not picking anymore
 				var d = document.getElementById(playerPicking + "Champion");
@@ -46,9 +45,7 @@ module.exports = function(app) {
 			}else{								
 				//change page and launch calculations
 				document.location.href = 'index.html#/gameResults'					
-			}
-				
-			
+			}	
 		});
 	  };
 	  return {

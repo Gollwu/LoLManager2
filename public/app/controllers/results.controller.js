@@ -7,7 +7,7 @@ module.exports = function(app) {
 		$scope.redTeam = "Counter Daoulas Gaming";	        
 		
         $scope.initResults = function() {			
-			var promises = champSelectService.setAffinitiesAndPerformances();
+			var promises = champSelectService.setPerformances();
 			Promise.all(promises)
 				.then(() => {	
 					// get teams champion select service    
@@ -15,8 +15,8 @@ module.exports = function(app) {
 					$scope.redTeamPlayers = champSelectService.getRedTeamPlayers();		
 					
 					champSelectService.assignScores();					
-					console.log("WTFFFFFFFF");	
-					console.log("BlueTeam : " + $scope.blueTeamPlayers);					
+					console.log("WTFFFFFFFF");										
+					console.log("BlueTeam : " + $scope.blueTeamPlayers[0].championAffinity);					
 					$scope.$apply();									
 				})
 				.catch((err) => {
