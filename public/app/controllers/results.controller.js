@@ -14,9 +14,11 @@ module.exports = function(app) {
 					$scope.blueTeamPlayers = champSelectService.getBlueTeamPlayers();	
 					$scope.redTeamPlayers = champSelectService.getRedTeamPlayers();		
 					
-					champSelectService.assignScores();					
-					console.log("WTFFFFFFFF");										
-					console.log("BlueTeam : " + $scope.blueTeamPlayers[0].championAffinity);					
+					var winner = champSelectService.assignScores();		
+					console.log(winner);					
+					$scope.blueWinLose = (winner == "Blue" ? "victory" : "defeat"); 
+					$scope.redWinLose = (winner == "Red" ? "victory" : "defeat"); 
+									
 					$scope.$apply();									
 				})
 				.catch((err) => {
