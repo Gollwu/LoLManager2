@@ -227,7 +227,7 @@ module.exports = function(app) {
 				//Put a game length between 25 and 60 min
 				//TODO Parametrize
 				var gameLength = Math.random()*35+25;
-				var killPerMinutes = Math.random()+0.1;
+				var killPerMinutes = Math.random()+0.05;
 				var totalKills = Math.round(gameLength * killPerMinutes);		
 				
 				var redTeamPerformance = this.getRedTeamTotalPerformance();
@@ -235,7 +235,7 @@ module.exports = function(app) {
 				
 				var winningTeam = (Math.random()*(redTeamPerformance+blueTeamPerformance)<redTeamPerformance ? "Red" : "Blue");			
 									
-				var winningTeamKillPercentageBonus = 30;
+				var winningTeamKillPercentageBonus = 50;
 				var blueTeamKills = Math.round((totalKills*redTeamPerformance)/(redTeamPerformance+blueTeamPerformance)) 
 				var redTeamKills = Math.round((totalKills*blueTeamPerformance)/(redTeamPerformance+blueTeamPerformance)) 								
 											
