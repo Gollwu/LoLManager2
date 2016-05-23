@@ -4,8 +4,8 @@ module.exports = function(app) {
     app.controller('ChampionSelectCtrl', ($scope, $http, $timeout, champSelectService, championsService) => {  		
         $scope.init = function() {				
 			//Get champions and players for display
-			$scope.blueTeam = "Team Solo Jefe";
-			$scope.redTeam = "Counter Daoulas Gaming";				
+			$scope.blueTeam = "Team Solo Mid";
+			$scope.redTeam = "Counter Logic Gaming";				
 			var championPromise = championsService.retrieveChampions();
 			var promises = champSelectService.fillPlayers($scope.blueTeam, $scope.redTeam);
 			promises.push(championPromise);

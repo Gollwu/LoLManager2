@@ -11,18 +11,18 @@ var Player = require('../app/models/player.model')(Mongoose),
 	Champion = require('../app/models/champion.model')(Mongoose);	
 	
 //Config for the init of the DB, please remember to empty the tables before launching the script.
-var championAmount = 130; //Max allChampionsNames.length (128 currently)
+var championAmount = 131; //Max allChampionsNames.length (128 currently)
 var playerAmount = 10; //Max allPlayerNames.length (20 currently)
 var onetoHundredAttributesChampions = ["strength"];
 var onetoHundredAttributesPlayers = [];
-var playerAffinitiestoChampions = 130; //Max championAmount
+var playerAffinitiestoChampions = 131; //Max championAmount
 var playerAffinitiestoPlayers = 9; //Max playerAmount-1
 var teamNumbers = 2; //Min 1, Max 2
 
 //Arrays with names for champions and players
-var allChampionsNames = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie", "Ashe", "Aurelion Sol", "Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz", "Galio", "Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Illaoi","Irelia","Janna","Jarvan IV", "Jax", "Jayce","Jhin","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'zix","Kindred","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Talon","Tahm Kench","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
-var allPlayerNames = ["ElJefe","Gollwu","Hycariss","DaoulaS","Qrthur","Vaulkh","lardon","ostracil","Nene","Nerevar","Darryck","le joueur francais","GroBen","azexpli","Sowerdski","Kraki","Kraku","pseudo@", "test", "Collot"];
-var allTeamNames = ["Team Solo Jefe", "Counter Daoulas Gaming"];	
+var allChampionsNames = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie", "Ashe", "Aurelion Sol", "Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz", "Galio", "Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Illaoi","Irelia","Janna","Jarvan IV", "Jax", "Jayce","Jhin","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'zix","Kindred","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Taliyah","Talon","Tahm Kench","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
+var allPlayerNames = ["TSM Hauntzer","CLG Darshan","TSM Svenskeren","CLG Xmithie","TSM Bjergsen","CLG Huhi","TSM Doublelift","CLG Stixxay","TSM Biofrost","CLG Aphromoo"];
+var allTeamNames = ["Team Solo Mid", "Counter Logic Gaming"];	
 
 var promise = setupMongoose();
 promise
