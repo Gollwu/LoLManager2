@@ -11,7 +11,7 @@ module.exports = function(app) {
 			promises.push(championPromise);
 			
 			Promise.all(promises)
-				.then(() => {						
+				.then(() => {							
 					$scope.blueTeamPlayers = champSelectService.getBlueTeamPlayersName();	
 					$scope.redTeamPlayers = champSelectService.getRedTeamPlayersName();			
 					$scope.champions = championsService.getAllChampions();	

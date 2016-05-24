@@ -12,10 +12,8 @@ module.exports = function(app) {
 				.then(() => {	
 					// get teams champion select service    
 					$scope.blueTeamPlayers = champSelectService.getBlueTeamPlayers();	
-					$scope.redTeamPlayers = champSelectService.getRedTeamPlayers();		
-					
-					var winner = champSelectService.assignScores();		
-					console.log(winner);					
+					$scope.redTeamPlayers = champSelectService.getRedTeamPlayers();							
+					var winner = champSelectService.assignScores();											
 					$scope.blueWinLose = (winner == "Blue" ? "victory" : "defeat"); 
 					$scope.redWinLose = (winner == "Red" ? "victory" : "defeat"); 
 									

@@ -1,5 +1,5 @@
 module.exports = function(app) {
-   app.factory('champSelectService', function($http){
+   app.factory('champSelectService', function($http, champSelectConfigService){
 	    return {
 			data: [{
 			  name: '',
@@ -224,30 +224,32 @@ module.exports = function(app) {
 				return promises;
 			},
 			assignScores: function() {
-				//Put a game length between 25 and 60 min
-				//TODO Parametrize
-				var gameLength = Math.random()*35+25;
-				var killPerMinutes = Math.random()+0.05;
-				var totalKills = Math.round(gameLength * killPerMinutes);		
+				
+				//Randomize game length and kill per minute
+				var gameLength = Math.random() *(champSelectConfigService.getGameMaxLength()-champSelectConfigService.getGameMinLength())+champSelectConfigService.getGameMinLength();				
+				var killPerMinutes = Math.random() *(champSelectConfigService.getKillPerMinuteMax()-champSelectConfigService.getKillPerMinuteMin())+champSelectConfigService.getKillPerMinuteMin();
+											
+				var totalKills = Math.round(gameLength * killPerMinutes);					
 				
 				var redTeamPerformance = this.getRedTeamTotalPerformance();
 				var blueTeamPerformance = this.getBlueTeamTotalPerformance();
 				
 				var winningTeam = (Math.random()*(redTeamPerformance+blueTeamPerformance)<redTeamPerformance ? "Red" : "Blue");			
 									
-				var winningTeamKillPercentageBonus = 50;
+				//Calcluate kill per team depending on total perforance
 				var blueTeamKills = Math.round((totalKills*redTeamPerformance)/(redTeamPerformance+blueTeamPerformance)) 
 				var redTeamKills = Math.round((totalKills*blueTeamPerformance)/(redTeamPerformance+blueTeamPerformance)) 								
-											
+							
+				//Add a few kills to the winning team
 				if(winningTeam == "Blue"){
-					blueTeamKills += Math.round(blueTeamKills/10); 					
+					blueTeamKills += Math.round(blueTeamKills * champSelectConfigService.getWinningTeamKillBonus()); 					
 				}else{
-					redTeamKills += Math.round(redTeamKills/10); 	
+					redTeamKills += Math.round(redTeamKills* champSelectConfigService.getWinningTeamKillBonus()); 	
 				}						
-				
+												
 				//TODO Set Total assist multiplicator with team affinity?
-				var blueTeamAssists = blueTeamKills*3;
-				var redTeamAssists = redTeamKills*3;						
+				var blueTeamAssists = blueTeamKills*champSelectConfigService.getKillAssistRatio();
+				var redTeamAssists = redTeamKills*champSelectConfigService.getKillAssistRatio();						
 				
 				//Set KDA percentages per blue player
 				totalBlueKill = this.KDARatios[0].kill * (this.data[0].performance*100/blueTeamPerformance) + this.KDARatios[1].kill * (this.data[3].performance*100/blueTeamPerformance) + this.KDARatios[2].kill * (this.data[4].performance*100/blueTeamPerformance) + this.KDARatios[3].kill * (this.data[7].performance*100/blueTeamPerformance) + this.KDARatios[4].kill * (this.data[8].performance*100/blueTeamPerformance);
@@ -258,9 +260,7 @@ module.exports = function(app) {
 				totalRedKill = this.KDARatios[0].kill * (this.data[1].performance*100/redTeamPerformance) + this.KDARatios[1].kill * (this.data[2].performance*100/redTeamPerformance) + this.KDARatios[2].kill * (this.data[5].performance*100/redTeamPerformance) + this.KDARatios[3].kill * (this.data[6].performance*100/redTeamPerformance) + this.KDARatios[4].kill * (this.data[9].performance*100/redTeamPerformance);				
 				totalRedDeath = this.KDARatios[0].death/(this.data[1].performance*100/redTeamPerformance) + this.KDARatios[1].death/(this.data[2].performance*100/redTeamPerformance) + this.KDARatios[2].death/(this.data[5].performance*100/redTeamPerformance) + this.KDARatios[3].death/(this.data[6].performance*100/redTeamPerformance) + this.KDARatios[4].death/(this.data[9].performance*100/redTeamPerformance);				
 				totalRedAssist = this.KDARatios[0].assist * (this.data[1].performance*100/redTeamPerformance) + this.KDARatios[1].assist * (this.data[2].performance*100/redTeamPerformance) + this.KDARatios[2].assist * (this.data[5].performance*100/redTeamPerformance) + this.KDARatios[3].assist * (this.data[6].performance*100/redTeamPerformance) + this.KDARatios[4].assist * (this.data[9].performance*100/redTeamPerformance);
-				
-				
-				
+							
 				//Set kills for blue team						
 				this.data[0].kills = Math.round(((this.KDARatios[0].kill * (this.data[0].performance*100/blueTeamPerformance))/totalBlueKill)*blueTeamKills);
 				this.data[3].kills = Math.round(((this.KDARatios[1].kill * (this.data[3].performance*100/blueTeamPerformance))/totalBlueKill)*blueTeamKills);
