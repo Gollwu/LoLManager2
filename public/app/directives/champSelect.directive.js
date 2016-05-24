@@ -6,6 +6,8 @@ module.exports = function(app) {
 		//Display that the player clicked on this champion
 		$(champSquare).on("click", function() {	
 			document.getElementById(champSelectService.getPlayerPicking() + "Champion").src = this.src
+			//Enable Lock Button since a champ has been selected
+			document.getElementById("lockButton").disabled = false;
 		});
 	  };
 	  return {
@@ -41,7 +43,11 @@ module.exports = function(app) {
 				
 				//Add the css to display that the player is picking if players left 			
 				var d = document.getElementById(champSelectService.getPlayerPicking() + "Champion");
-				d.className += " picking";			
+				d.className += " picking";		
+				
+				//Disable Lock Button until champion is selected
+				document.getElementById("lockButton").disabled = true;		
+				
 			}else{								
 				//change page and launch calculations
 				document.location.href = 'index.html#/gameResults'					
