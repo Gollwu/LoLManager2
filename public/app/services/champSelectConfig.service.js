@@ -7,7 +7,7 @@ module.exports = function(app) {
 			killPerMinuteMax:1.1,
 			winningTeamKillBonus:0.3,
 			//Temporary
-			killAssistRatio:3,
+			killAssistRatio:2,
 			
 			getGameMaxLength: function() {
 				return this.gameMaxLength;
