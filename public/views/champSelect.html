@@ -21,7 +21,11 @@
 	<div class="row" id="PlayersChampionsRow">
 		 <div class="col-lg-2 col-lg-offset-2">
 			<div class="center-block">	
-				<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
+				<div class="playerNames" ng-repeat-start="bluePlayer in blueTeamPlayers" ng-if="$first">
+					<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
+					<img id="{{bluePlayer}}Champion" class="playerChampSelect picking" src="images/champions/square/null.png"/>						
+				</div>	
+				<div class="playerNames" ng-repeat-end ng-if="!$first">
 					<p id="{{bluePlayer}}Name"> {{bluePlayer}} </p>
 					<img id="{{bluePlayer}}Champion" class="playerChampSelect" src="images/champions/square/null.png"/>						
 				</div>	
