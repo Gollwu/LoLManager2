@@ -1,0 +1,74 @@
+#teamSelectRow{
+	margin-top:50px;
+}
+
+
+#redTeamDisplay, #blueTeamDisplay{
+	min-width:200px;
+}
+
+#redTeamDisplay{
+	margin-left:50px;
+}
+
+#allChampions{
+	margin-top:50px;
+	height:641px;
+	overflow-x:hidden;
+	overflow-y:scroll;	
+	width:602px;
+}
+
+#lockButton{
+	margin-top:50px;
+	margin-left: 250px;
+}
+
+
+
+
+
+
+.playerNames{
+	color:#FFF;
+	margin-top:40px;
+}
+
+.playerNamesRed{
+	margin-left:100px;
+}
+
+.playerChampSelect{
+	width:80px;
+	margin-left:60px;
+}
+
+.champSelect{
+	width:80px;
+	float:left;
+	cursor:pointer;
+}
+
+.picking{
+	border: 3px solid orange;	
+}
+
+
+.row{
+	margin-left:0px;
+	margin-right:0px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background-color: #eaeaea;
+    border-left: 1px solid #336699;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #336699;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #204060;
+}

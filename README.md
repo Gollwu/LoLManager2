@@ -4,6 +4,12 @@
 npm install
 ~~~
 
+##How to run
+node server
+browserify app.js (if change frontend js code)
+
+Globally install: bower, gulp, tsd and typescript
+
 ##How to run tests
 ~~~~
 npm test
@@ -114,23 +120,6 @@ Return
 * name
 * team
 
---
-GET player/player affinity
-~~~~javascript
-/dataSource/players/:playerid/affinityPlayer/:player2id
-~~~~
-Return
-* affinity
-* nameplayer1
-* nameplayer2
 
---
-GET player/champion affinity
-~~~~javascript
-/dataSource/players/:playerid/affinityChampion/:championid
-~~~~
-Return
-* affinity
-* player
-* champion
+
 

@@ -1,91 +1,108 @@
-var env = process.env.NODE_ENV || 'development';
-var config = require('./config')[env];
+var Mongoose = require("mongoose"),
+    Promise = require('promise'),
+    Schema = Mongoose.Schema,
+    relationship = require("mongoose-relationship"),
+	consoleLogger = require('../app/logger/logger'),	
+    env = process.env.NODE_ENV || 'development',
+    config = require('./config')[env];	
 
-var mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    relationship = require("mongoose-relationship");
+
+var Player = require('../app/models/player.model')(Mongoose),
+	Champion = require('../app/models/champion.model')(Mongoose);	
 	
-mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db);
+//Config for the init of the DB, please remember to empty the tables before launching the script.
+var championAmount = 131; //Max allChampionsNames.length (128 currently)
+var playerAmount = 10; //Max allPlayerNames.length (20 currently)
+var onetoHundredAttributesChampions = ["strength"];
+var onetoHundredAttributesPlayers = [];
+var playerAffinitiestoChampions = 131; //Max championAmount
+var playerAffinitiestoPlayers = 9; //Max playerAmount-1
+var teamNumbers = 2; //Min 1, Max 2
 
-var playerSchema = mongoose.Schema({
-    name: String
-});
+//Arrays with names for champions and players
+var allChampionsNames = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie", "Ashe", "Aurelion Sol", "Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz", "Galio", "Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Illaoi","Irelia","Janna","Jarvan IV", "Jax", "Jayce","Jhin","Jinx","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kennen","Kha'zix","Kindred","Kog'Maw","LeBlanc","Lee Sin","Leona","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Nidalee","Nocturne","Nunu","Olaf","Orianna","Pantheon","Poppy","Quinn","Rammus","Rek'Sai","Renekton","Rengar","Riven","Rumble","Ryze","Sejuani","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Syndra","Taliyah","Talon","Tahm Kench","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'koz","Vi","Viktor","Vladimir","Volibear","Warwick","Wukong","Xerath","Xin Zhao","Yasuo","Yorick","Zac","Zed","Ziggs","Zilean","Zyra"];
+var allPlayerNames = ["TSM Hauntzer","CLG Darshan","TSM Svenskeren","CLG Xmithie","TSM Bjergsen","CLG Huhi","TSM Doublelift","CLG Stixxay","TSM Biofrost","CLG Aphromoo"];
+var allTeamNames = ["Team Solo Mid", "Counter Logic Gaming"];	
 
-var Player = mongoose.model('Player', playerSchema);
+var promise = setupMongoose();
+promise
+	.then(() => {
+		consoleLogger.info('DB connection and setup successful.');
+		//process.exit(0);
+	})
+	.catch((err) => {	
+		console.log(err);		
+		consoleLogger.info('Failed to open a connection to database or to create the server. ', err);
+		process.exit(1);
+	});
 
-var player1 = new Player({ name: 'Jeff' });
-player1.save();
 
-var player2 = new Player({ name: 'Hycariss' });
-player2.save();
 
-var player3 = new Player({ name: 'Kraki' });
-player3.save();
+// define models and open a connection with MongoDB instance
+function setupMongoose() {
+    var promise =
+        new Promise((fulfill, reject) => {
+            try{
+                
+                var promiseDBConn = Mongoose.connect('mongodb://' + config.database.host + config.database.port + config.database.db); 					
+                promiseDBConn
+                    .then(() => {
+						var promises = setupDB();
+						Promise.all(promises)
+							.then(() => {
+								fulfill();
+							})
+							.catch((err) => {
+								reject(err);
+							});						
+                    }) 
+                    .catch((err) => {
+                        reject(err);
+                    });
+            } 
+            catch(err) {
+                reject(err);    
+            }
+        });
+    return promise;
+}
 
-var player4 = new Player({ name: 'Djambi' });
-player4.save();
+function setupDB() {	
+    consoleLogger.info('In setupDB');
+    var promises = [];
+    var promise = {};
+	
+	for (var i = 0; i < playerAmount ; i++) { 
+		var player = new Mongoose.models.Player({
+			name: allPlayerNames[i],
+			team: allTeamNames[i%teamNumbers],
+			championsAffinity: [],
+			playersAffinity: []
+		});
+		for (var j = 0; j < playerAffinitiestoChampions ; j++) { 
+			player.championsAffinity.push({name: allChampionsNames[j], affinity: Math.round(100*Math.random())});
+		}
+		for (var j = 0; j < playerAffinitiestoPlayers+1 ; j++) { 
+			if(player.name!=allPlayerNames[j]){
+				player.playersAffinity.push({name: allPlayerNames[j], affinity: Math.round(100*Math.random())});
+			}	
+		}
+		for (var j = 0; j < onetoHundredAttributesPlayers ; j++) { 
+			player[onetoHundredAttributesPlayers[j]] =  Math.round(100*Math.random());
+		}
+		
+		promise = player.save();
+		promises.push(promise);
+	}
 
-var player5 = new Player({ name: 'Nene' });
-player5.save();
-
-var player6 = new Player({ name: 'Qrthur' });
-player6.save();
-
-var player7 = new Player({ name: 'Azexpli' });
-player7.save();
-
-var player8 = new Player({ name: 'Darryck' });
-player8.save();
-
-var player9 = new Player({ name: 'Ostra' });
-player9.save();
-
-var player10 = new Player({ name: 'test' });
-player10.save();
-
-var championSchema = mongoose.Schema({
-    name: String
-});
-
-var Champion = mongoose.model('Champion', championSchema);
-
-var champion1 = new Champion({ name: 'Aatrox' });
-champion1.save();
-
-var champion2 = new Champion({ name: 'Ahri' });
-champion2.save();
-
-var champion3 = new Champion({ name: 'Annie' });
-champion3.save();
-
-var champion4 = new Champion({ name: 'Hecarim' });
-champion4.save();
-
-var champion5 = new Champion({ name: 'Olaf' });
-champion5.save();
-
-var champion6 = new Champion({ name: 'Kog\'Maw' });
-champion6.save();
-
-var champion7 = new Champion({ name: 'Riven' });
-champion7.save();
-
-var champion8 = new Champion({ name: 'Thresh' });
-champion8.save();
-
-var champion9 = new Champion({ name: 'Fiddlesticks' });
-champion9.save();
-
-var champion10 = new Champion({ name: 'Blitzcrank' });
-champion10.save();
-
-var playerChampionSchema = mongoose.Schema({
-    champion: { type:Schema.ObjectId, ref:"Champion"},
-	player: { type:Schema.ObjectId, ref:"Champion"},
-	affinity: String
-});
-
-var PlayerChampion = mongoose.model('PlayerChampion', playerChampionSchema);
-var champion10 = new PlayerChampion({ affinity: "100", champion:champion1._id, player:player1._id });
-champion10.save();
-
+	for (var i = 0; i < championAmount ; i++) { 
+		var champion = new Mongoose.models.Champion({ name: allChampionsNames[i], strength: Math.round(100*Math.random()) });
+		for (var j = 0; j < onetoHundredAttributesChampions ; j++) { 
+			champion[onetoHundredAttributesChampions[j]] =  Math.round(100*Math.random());
+		}
+		promise = champion.save();
+		promises.push(promise);
+	}      
+            
+    return promises;
+}

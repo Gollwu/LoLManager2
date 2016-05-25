@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="../css/gameResults.css">
+<div ng-controller="ResultsCtrl" ng-init="initResults()">
+	<div class="row" id="teamSelectRow" >
+		<div class="col-lg-4 col-lg-offset-2" >
+			<div class="center-block" >			
+				<span class="btn btn-primary" type="button" id="blueTeamDisplay">
+					{{blueTeam}}	
+				</span>								
+			</div>		
+			<img style="margin-left:50px;" class="{{blueWinLose}}Display" ng-src="images/{{blueWinLose}}.png"/>			
+		</div>
+
+		<div class="col-lg-4 col-lg-offset-2">
+			<div>
+				<span class="btn btn-primary" id="redTeamDisplay">
+					{{redTeam}} 					
+				</span>	
+			</div>			
+			<img class="{{redWinLose}}Display" ng-src="images/{{redWinLose}}.png"/>		
+		</div>
+	</div>
+
+	<div class="row" id="PlayersChampionsRow">
+		 <div class="col-lg-4 col-lg-offset-2">
+			<div style="float:right; margin-right: 10%;">	
+				<header></header>
+				<div class="playerNames" ng-repeat="bluePlayer in blueTeamPlayers">
+					<span id="{{bluePlayer.name}}Name" class="playerBlueName"> {{bluePlayer.name}} </span>
+					<img id="{{bluePlayer.name}}Champion" class="playerChampSelect bluePlayerChampSelect" ng-src="images/champions/square/{{bluePlayer.champion}}_Square_0.png"/>
+					<div class="blueScores">
+						<span class="score">{{bluePlayer.kills}}</span>
+						<span class="score">/</span>
+						<span class="score">{{bluePlayer.deaths}}</span>
+						<span class="score">/</span>
+						<span class="score">{{bluePlayer.assists}}</span>
+					</div>						
+				</div>	
+			</div>	
+		 </div>		 	
+		
+		 <div class="col-lg-4">
+			 <div style="float:left; margin-left: 10%;">	
+				<div class="playerNames playerNamesRed" ng-repeat="redPlayer in redTeamPlayers">	
+					<div class="redScores">
+						<span class="score">{{redPlayer.kills}}</span>
+						<span class="score">/</span>
+						<span class="score">{{redPlayer.deaths}}</span>
+						<span class="score">/</span>
+						<span class="score">{{redPlayer.assists}}</span>
+					</div>	
+					<img id="{{redPlayer.name}}Champion" class="playerChampSelect redPlayerChampSelect" ng-src="images/champions/square/{{redPlayer.champion}}_Square_0.png"/>
+					<span id="{{redPlayer.name}}Name" class="playerRedName"> {{redPlayer.name}} </span>
+				</div>	
+			</div>	
+		 </div>
+	</div>
+</div>	
+			
+			
+			
+		
+	

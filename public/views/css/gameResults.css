@@ -1,0 +1,69 @@
+#teamSelectRow{
+	margin-top:50px;
+}
+
+#redTeamDisplay, #blueTeamDisplay{
+	min-width:200px;
+}
+
+#redTeamDisplay{
+	margin-left:50px;
+}
+
+
+.playerNames{
+	color:#FFF;
+	margin-top:15px;
+}
+
+.playerRedName{
+	width: 40px;
+	float:right;
+	margin-top: 16px;
+}
+
+.playerBlueName{
+	width: 40px;
+	float:left;
+	margin-top: 16px;
+}
+
+.redScores{	
+	float: left;
+	margin-right:50px;
+	margin-top: 16px;
+}
+
+.blueScores{	
+	margin-top: 16px;
+	float: right;
+	margin-left:50px;
+}
+
+
+.playerChampSelect{
+	width:60px;
+}
+
+.bluePlayerChampSelect{	
+	margin-left:50px;
+}
+
+.redPlayerChampSelect{
+	margin-right:50px;
+}
+
+.victoryDisplay{
+	width:300px;	
+	margin-top:50px;	
+}
+
+.defeatDisplay{
+	width:200px;
+	margin-top:50px;	
+}
+
+.row{
+	margin-left:0px;
+	margin-right:0px;
+}
