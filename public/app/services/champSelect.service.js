@@ -98,7 +98,7 @@ module.exports = function(app) {
 				
 				//Get Players from blue team
 				var promise =  $http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent(blueTeamName)+'/players',
+					url: 'teams/'+encodeURIComponent(blueTeamName)+'/players',
 					method: 'GET',				
 				})
 				.then((response) => {
@@ -113,7 +113,7 @@ module.exports = function(app) {
 				
 				//Get Players from red team
 				promise = $http({
-					url: 'http://localhost\:5000/teams/'+encodeURIComponent(redTeamName)+'/players',
+					url:  'teams/'+encodeURIComponent(redTeamName)+'/players',
 					method: 'GET',				
 				})
 				.then((response) => {
@@ -229,7 +229,7 @@ module.exports = function(app) {
 				var promises = [];
 			    this.blueTeam.forEach(function a(player,index) {
 					promises.push($http({
-						url: 'http://localhost\:5000/players/'+encodeURIComponent(player.name),
+						url: 'players/'+encodeURIComponent(player.name),
 						method: 'GET'
 					})
 					.then((response) => {						
@@ -242,7 +242,7 @@ module.exports = function(app) {
 				}); 
 				this.redTeam.forEach(function a(player,index) {
 					promises.push($http({
-						url: 'http://localhost\:5000/players/'+encodeURIComponent(player.name),
+						url: 'players/'+encodeURIComponent(player.name),
 						method: 'GET'
 					})
 					.then((response) => {						

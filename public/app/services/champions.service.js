@@ -4,7 +4,7 @@ module.exports = function(app) {
 		champions: [],
 		retrieveChampions: function() {
             var promise = $http({
-				url: 'http://localhost\:5000/champions',
+				url: 'champions',
 				method: 'GET'
 			})
 			.then((response) => {					

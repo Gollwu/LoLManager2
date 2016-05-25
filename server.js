@@ -40,8 +40,8 @@ function createServer() {
 	
 	
     var server = 
-        app.listen(5000, () => {
-            consoleLogger.info('Server listening on port ', 5000);
+        app.listen((process.env.PORT || 5000), () => {
+            consoleLogger.info('Server listening on port ', (process.env.PORT || 5000));
         });
     
     return server;
