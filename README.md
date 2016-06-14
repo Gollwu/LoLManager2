@@ -1,124 +1,82 @@
-#Possible set up
+#League of Legends Manager v0.1
 ##How to install 
 ~~~
 npm install
 ~~~
 
 ##How to run
-node server
-browserify app.js (if change frontend js code)
 
-Globally install: bower, gulp, tsd and typescript
+*Create config.js file in config folder
 
-##How to run tests
 ~~~~
-npm test
-~~~~
+var config = {
+	development: {		
+		//mongodb connection settings
+		database: {
+			host:   'host',
+			port:   ':port',
+			db:     '/db'
+		},
+		//server details
+		server: {
+			host: 'host',
+			port: 'port'
+		}
+	}
+};
+module.exports = config;
+~~~~         
+
+* browserify app/app.js > build/bundle.js 
+* node server
+
 
 ##File structure
 app/
-* Middleware: routing, models
+* Middleware: routing, models and logger
 
 config/
+* Environment-based configuration for servers and databases 
+* Development JavaScript for databases
 
-public/
-* frontend view...
+public/app
+* Angular Controllers
+* Angular Directives
+* Angular Services
+
+public/build
+* Browserify build
+
+public/views
+* HTML/CSS code of pages
+* FrontEnd Javascript 
+* Images
 
 tests/
-
-##Tools
-###Logger
-https://www.npmjs.com/package/simple-node-logger
-https://github.com/expressjs/morgan
-
-###Testing
-https://mochajs.org/
-See example in tests/server.js
-
-###Possible database
-If we decide to go with MongoDB, we want to favor read speed over writing speed.
-
-####De-normalized db
-
-Players
-~~~~javascript
-{
-    _id: "krekkles", 
-    team: "Raviolis",
-    championsAffinity: [
-        {name: "ahri", affinity: 50},
-        {name: "ezreal", affinity: 50}
-    ] , 
-    playersAffinity: [
-        {name: "gollwu", affinity: 50},
-        {name: "qruthur", affinity: 50}
-        {name: "benichou", affinity: 50}
-    ]
-},
-{
-    _id: "gollwu", 
-    team: "CounterRaviolis",
-    championsAffinity: [
-        {name: "ahri", affinity: 50},
-        {name: "ezreal", affinity: 50}
-    ] , 
-    playersAffinity: [
-        {name: "gollwu", affinity: 50},
-        {name: "qruthur", affinity: 50}
-        {name: "benichou", affinity: 50}
-    ]
-}
-~~~~
-
-Champions
-~~~~javascript
-{
-    _id: "ahri", 
-    strength: 10
-},
-{
-    _id: "akali", 
-    strength: 10
-}
-~~~~
+* To be updated in 0.2
 
 
-##REST-like API
-Simple interface definition
-####Players
-GET all champions
-~~~~javascript
-/dataSource/champions
-~~~~
-Return 
-* name
-* team
+##How to run tests (To be updated in 0.2)
 
-GET all players
-~~~~javascript
-/dataSource/players
-~~~~
-Return 
-* name
-* team
 
---
-GET team
-~~~~javascript
-/dataSource/teams/:teamid
-~~~~
-Return 
-* name
-* array id of players
+##Dependencies
+###Development
+* Simple Node Logger
+* Morgan
+* Promise
+* Express
+* Browserify
 
---
-GET a specific player
-~~~~javascript
-/dataSource/players/:playerid
-~~~~
-Return 
-* name
-* team
+###Database
+* Sequelize
+* pg
+
+###Testing (To be updated in 0.2)
+* SuperTest
+* Mocha
+* Chai
+
+
 
 
 

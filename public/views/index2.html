@@ -1,0 +1,64 @@
+<html ng-app="LoLManager">
+   
+    <head>
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		
+		<link rel="stylesheet" href="../css/index.css">
+		
+		<script>	
+			//Functions for team selection		 
+			$(function(){
+				$("#dropdownBlueTeam").on('click', 'li a', function(){				
+				  $("#chooseBlueTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";								 
+			   });
+			});
+			$(function(){
+				$("#dropdownRedTeam").on('click', 'li a', function(){
+				  $("#chooseRedTeam")[0].innerHTML = $(this).text() + " <span class='caret'></span>";								 		 
+			   });
+			});
+		</script>
+        
+    </head>
+
+<body>
+    <div class="row" id="teamSelectRow">
+        <div class="col-lg-2 col-lg-offset-2">
+            <div class="center-block" ng-controller="TeamCtrl">			
+				<button class="btn btn-primary dropdown-toggle" type="button" id="chooseBlueTeam" data-toggle="dropdown"  aria-expanded="true">
+					t1			
+				<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu4" ng-init="init()">
+					<li ng-repeat="team in teams">
+						<a href="#">t1</a>
+						<a href="#">t2</a>
+					</li>
+				</ul>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-lg-offset-4">
+            <div ng-controller="TeamCtrl">
+                <button class="btn btn-primary dropdown-toggle" id="chooseRedTeam" data-toggle="dropdown" aria-expanded="true">
+                    t2
+               <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" id="dropdownBlueTeam" aria-labelledby="dropdownMenu3" ng-init="init()">
+					<li ng-repeat="team in teams">
+						<a href="#">t1</a>
+						<a href="#">t2</a>
+					</li>
+				</ul>            
+            </div>
+        </div>
+    </div>
+    
+    <script src="http://localhost:5000/bundle.js"></script>
+    
+</body>
+    
+</html>
