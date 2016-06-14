@@ -25,7 +25,7 @@
     "path": "^0.12.7",
 	"pg": "^5.1.0",
     "promise": "^7.1.1",
-	"sequelize":^3.0.0"
+	"sequelize":"^3.0.0",
     "simple-node-logger": "^0.93.11",
     "supertest": "^1.2.0"
   }
