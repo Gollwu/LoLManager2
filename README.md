@@ -6,7 +6,7 @@ npm install
 
 ##How to run
 
-*Create config.js file in config folder
+* Create config.js file in config folder
 
 ~~~~
 var config = {
